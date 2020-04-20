@@ -40,5 +40,11 @@
     p{
         margin: 0 auto;
         color: white;
+        height: 100%;
+        width: calc( 100% - 70px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
     }
 }

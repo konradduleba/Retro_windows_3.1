@@ -1,0 +1,165 @@
+@mixin flexItems {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.optionsWindow{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: white;
+    z-index: 10;
+    border: 1px solid black;
+
+    ul{
+        list-style: none;
+
+        li{
+            @include flexItems();
+
+            width: 100%;
+            height: 35px;
+            justify-content: center;
+            font-size: 15px;
+
+            &:nth-last-child(1){
+                border-top: 1px solid black;
+            }
+
+            &:hover{
+                background-color:#0800B0;
+                color: white;
+                cursor: pointer;
+            }
+
+            &:hover>p{
+                color: white;
+            }
+
+            i{
+                width: 40px;
+                height: 100%;
+                font-size: 15px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            p{
+                display: flex;
+                justify-content: left;
+                width: 100px;
+                color: black;
+
+            }
+        }
+    }
+}
+
+.optionCloseWindow{
+    position: absolute;
+    top: -200vh;
+    left: -200vw;
+    width: 400vw;
+    height: 400vh;
+}
+
+.settingsWindow{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: white;
+    width: 200px;
+    border: 1px solid lightgray;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+
+    .navigation{
+        @include flexItems();
+
+        width: 100%;
+        height: 35px;
+        position: relative;
+
+        i{
+            position: absolute;
+            top: 50%;
+            right: 17px;
+            font-size: 25px;
+            transform: translate(50%,-50%);
+            color: #666;
+            cursor: pointer;
+
+            &:hover{
+                color: black;
+            }
+        }
+
+        p{
+            margin-left: 10px;
+            cursor: default;
+        }
+
+    }
+
+    .container{
+        display: flex;
+        flex-grow: 1;
+        flex-direction: column;
+
+        .icon_name{
+            @include flexItems();
+
+            height: 60px;
+            width: 100%;
+            background-color: lightgrey;
+
+            img{
+                height: 36px;
+                width: 36px;
+                margin-left: 10px;
+            }
+
+            input{
+                height: 36px;
+                width: 130px;
+                margin-left: 10px;
+                padding: 0 5px;
+                
+                &::placeholder{
+                    color: black;
+                }
+            }
+        }
+
+        .data{
+            display: flex;
+            flex-direction: row;
+            background-color: lightgrey;
+
+            p{
+                padding: 15px 0 15px 10px;
+                font-size: 15px;
+
+                &:nth-last-child(1){
+                    padding-right: 10px;
+                    text-align: left;
+                }
+            }
+        }
+
+        .endButtons{
+            @include flexItems();
+
+            justify-content: space-around;
+            padding: 10px 0;
+
+            button{
+                height: 30px;
+                padding: 0 10px;
+            }
+        }
+    }
+}

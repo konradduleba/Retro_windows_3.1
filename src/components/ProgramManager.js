@@ -1,75 +1,59 @@
 import React from 'react';
 import '../styles/ProgramManager.scss'
-import RenderDesktopProgramsIcon from './RenderDesktopProgramsIcon'
-import RenderProgramsWindow from './RenderProgramsWindow'
-import LogoClock from '../img/clock.png';
-import LogoCalculator from '../img/calculator.png';
-import LogoControlPanel from '../img/controlPanel.png';
-import LogoDate from '../img/date.png';
-import LogoInternet from '../img/internet.jpg';
+import RenderAppIcon from './RenderAppIcon'
+
+import IconClock from '../img/clock.png';
+import IconCalculator from '../img/calculator.png';
+import IconControlPanel from '../img/controlPanel.png';
+import IconDate from '../img/date.png';
+import IconInternet from '../img/internet.jpg';
 
 class ProgramManager extends React.Component {
 
     state = {
-        PMListProgram: [{
+        PMAppList: [{
             name: 'Clock',
-            icon: LogoClock,
+            icon: IconClock,
         },
         {
             name: 'Calculator',
-            icon: LogoCalculator,
+            icon: IconCalculator,
         },
         {
             name: 'Control Panel',
-            icon: LogoControlPanel,
+            icon: IconControlPanel,
         },
         {
             name: 'Date',
-            icon: LogoDate,
+            icon: IconDate,
         },
         {
             name: 'Internet',
-            icon: LogoInternet,
+            icon: IconInternet,
         }],
-        activeProgram: ""
     }
 
-    handlePrograms = (name) => {
-        this.setState({
-            activeProgram: name
-        })
-    }
-
-    handleCloseWindow = () => {
-        this.setState({
-            activeProgram: ""
-        })
-    }
-
-    checkLogo = () => {
-        if (this.state.activeProgram === 'Clock') return LogoClock
-        if (this.state.activeProgram === 'Calculator') return LogoCalculator
-        if (this.state.activeProgram === 'Control Panel') return LogoControlPanel
-        if (this.state.activeProgram === 'Date') return LogoDate
-        if (this.state.activeProgram === 'Internet') return LogoInternet
+    checkIcon = () => {
+        if (this.state.activeProgram === 'Clock') return IconClock
+        if (this.state.activeProgram === 'Calculator') return IconCalculator
+        if (this.state.activeProgram === 'Control Panel') return IconControlPanel
+        if (this.state.activeProgram === 'Date') return IconDate
+        if (this.state.activeProgram === 'Internet') return IconInternet
     }
 
     render() {
         return (
             <>
                 <div className="appList">
-                    <RenderDesktopProgramsIcon programList={this.state.PMListProgram} handlePrograms={(value) => {
-                        this.handlePrograms(value)
-                    }} />
+                    <RenderAppIcon
+                        programList={this.state.PMAppList}
+                        addToActiveProgram={this.props.addToActiveProgram}
+                        closeOptionsWindow={this.props.closeOptionsWindow}
+                        showOptionsWindow={this.props.showOptionsWindow}
+                        handleActiveAppOptionWindow={this.props.handleActiveAppOptionWindow}
+                        handleCloseWindow={this.props.handleCloseWindow}
+                    />
                 </div>
-                {this.state.activeProgram === "" ? null :
-                    <RenderProgramsWindow
-                        activeProgram={this.state.activeProgram}
-                        handleCloseWindow={(value) => {
-                            this.handleCloseWindow(value)
-                        }}
-                        logo={this.checkLogo()}
-                        handleMinimalizeApp={this.props.handleMinimalizeApp} />}
             </>
         )
     }
