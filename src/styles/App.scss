@@ -38,6 +38,7 @@ body{
     flex-direction: row;
     flex-wrap: wrap;
     overflow: hidden;
+    user-select: none;
 
     .appIcon{
       width: 90px;

@@ -1,6 +1,6 @@
 import React from 'react';
-import '../styles/NavBar.scss';
-import ShowOptionsWindow from './ShowOptionsWindow';
+import '../../styles/NavBar.scss';
+import ShowOptionsWindow from '../rightClick/ShowOptionsWindow';
 
 class NavBar extends React.Component {
 
@@ -31,8 +31,14 @@ class NavBar extends React.Component {
             visible: 'hidden'
         })
     }
+
+    checkTime = () => {
+        const date = new Date();
+        return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
+    }
+
     render() {
-        const { name, icon } = this.props.properties;
+        const { name, icon, analogTime, activeClockType } = this.props.properties;
         const showOptionsProperties = {
             name,
             icon,
@@ -65,7 +71,7 @@ class NavBar extends React.Component {
                         this.closeOptionsWindow()
                     }}
                     onContextMenu={this.showOptionsWindow}
-                    onClick={() => this.closeOptionsWindow()}>{name}</p>
+                    onClick={() => this.closeOptionsWindow()}>{name}{(analogTime && activeClockType === 'analog') ? ` - ${this.checkTime()}` : null}</p>
                 <button onClick={() => { this.props.handleCloseWindow(name) }}><i className="icon-cancel-1"></i></button>
             </div>
         )

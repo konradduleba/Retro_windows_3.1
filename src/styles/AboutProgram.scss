@@ -1,0 +1,62 @@
+.aboutProgram{
+    position: absolute;
+    width: 450px;
+    background-color: white;
+    border: 1px solid black;
+    z-index: 14;
+    display: flex;
+    flex-direction: column;
+
+    .aboutContainer{
+        display: flex;
+        flex-direction: row;
+        position: relative;
+
+        img{
+            margin: 20px;
+            height: 36px;
+        }
+    
+        .info{
+            display: flex;
+            flex-grow: 1;
+            flex-direction: column;
+            padding: 20px;
+            padding-left: 0;
+
+            .mainInfo{
+                margin-bottom: 40px;
+            }
+
+            .licence{
+                padding-bottom: 20px;
+                border-bottom: 2px solid black;
+            }
+
+            .serialNumber{
+                margin-top: 20px;
+                padding-bottom: 20px;
+                border-bottom: 2px solid black;
+            }
+
+            .sysInfo{
+                margin-top: 20px;
+                
+                p{
+                    text-transform: capitalize;
+                }
+            }
+        }
+
+        button{
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin: 20px 20px 0 0;
+            text-align: center;
+            padding: 5px 30px;
+        }
+    }
+
+    
+}

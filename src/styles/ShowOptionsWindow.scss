@@ -9,7 +9,7 @@
     top: 0;
     left: 0;
     background-color: white;
-    z-index: 10;
+    z-index: 20;
     border: 1px solid black;
 
     ul{
@@ -72,7 +72,7 @@
     background-color: white;
     width: 200px;
     border: 1px solid lightgray;
-    z-index: 10;
+    z-index: 21;
     display: flex;
     flex-direction: column;
 

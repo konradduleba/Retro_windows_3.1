@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/ProgramManager.scss'
-import RenderAppIcon from './RenderAppIcon'
+import RenderAppIcon from './mechanics/RenderAppIcon'
 
 import IconClock from '../img/clock.png';
 import IconCalculator from '../img/calculator.png';

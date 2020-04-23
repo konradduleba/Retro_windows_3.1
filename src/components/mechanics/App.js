@@ -2,13 +2,13 @@ import React from 'react';
 // import RenderAppWindow from './RenderAppWindow';
 import RenderAppIcon from './RenderAppIcon';
 import RenderActiveApp from './RenderActiveApp';
-import ShowOptionsWindow from './ShowOptionsWindow';
+import ShowOptionsWindow from '../rightClick/ShowOptionsWindow';
 
-import '../styles/App.scss';
+import '../../styles/App.scss';
 
-import iconProgramManager from '../img/programManager.png';
-import IconClock from '../img/clock.png';
-import IconCalculator from '../img/calculator.png';
+import iconProgramManager from '../../img/programManager.png';
+import IconClock from '../../img/clock.png';
+import IconCalculator from '../../img/calculator.png';
 
 class App extends React.Component {
 

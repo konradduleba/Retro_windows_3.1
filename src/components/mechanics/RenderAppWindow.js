@@ -1,17 +1,21 @@
 import React from 'react';
-import ProgramManager from './ProgramManager';
-import NavBar from './NavBar'
+import ProgramManager from '../ProgramManager';
+import NavBar from '../visual/NavBar'
 import ResizingElements from './ResizingElements'
+import Clock from '../clock/Clock'
 
-import '../styles/RenderAppWindow.scss'
+import '../../styles/RenderAppWindow.scss'
 
-class RenderProgramsWindow extends React.Component {
+class RenderAppWindow extends React.Component {
 
     state = {
         left: 10,
         top: 10,
         width: "",
         height: "",
+        noTitle: false,
+        analogTime: false,
+        activeClockType: 'digital',
     }
 
     isResizing = false;
@@ -148,12 +152,33 @@ class RenderProgramsWindow extends React.Component {
         })
     }
 
+    handleNoTitle = () => this.setState({ noTitle: !this.state.noTitle })
+    showAnalogTime = () => this.setState({ analogTime: true })
+    handleAnalogTime = () => this.setState({ analogTime: !this.state.analogTime })
+    closeAnalogTime = () => this.setState({ analogTime: false })
+    handleActiveClockType = value => {
+        this.setState({ activeClockType: `${value}` })
+    }
+
+    runProgram = name => {
+        if (name === 'Clock') return <Clock
+            handleNoTitle={() => this.handleNoTitle()}
+            showAnalogTime={() => this.showAnalogTime()}
+            closeAnalogTime={() => this.closeAnalogTime()}
+            handleAnalogTime={() => this.handleAnalogTime()}
+            handleActiveClockType={value => this.handleActiveClockType(value)}
+            properties={{ name: this.props.activeProgram, icon: this.props.icon }}
+        />
+    }
+
     render() {
         const navBarProperties = {
             name: this.props.activeProgram,
             icon: this.props.icon,
             top: this.state.top,
-            left: this.state.left
+            left: this.state.left,
+            analogTime: this.state.analogTime,
+            activeClockType: this.state.activeClockType
         }
         return (
             <section className={`programWindow ${this.props.activeProgram.replace(/ /g, '')}`} ref={(el) => {
@@ -164,18 +189,24 @@ class RenderProgramsWindow extends React.Component {
                     <ResizingElements resize={(event) => this.mousedownResize(event)} />
                 </ul>
                 <div className="container">
-                    <NavBar
-                        properties={navBarProperties}
-                        handleCloseWindow={this.props.handleCloseWindow}
-                        handleMinimalizeApp={this.props.handleMinimalizeApp}
-                        closeWindow={this.props.closeWindow}
-                        addToActiveProgram={this.props.addToActiveProgram}
-                        showOptionsWindow={this.props.showOptionsWindow}
-                        handleActiveAppOptionWindow={this.props.handleActiveAppOptionWindow}
-                        moveWindow={value => { this.mousedown(value) }}
-                        showCurrentApp={name => { this.showCurrentApp(name) }}
-                        maximize={this.maximize}
-                    />
+                    {!this.state.noTitle ?
+                        <NavBar
+                            properties={navBarProperties}
+                            handleCloseWindow={this.props.handleCloseWindow}
+                            handleMinimalizeApp={this.props.handleMinimalizeApp}
+                            closeWindow={this.props.closeWindow}
+                            addToActiveProgram={this.props.addToActiveProgram}
+                            showOptionsWindow={this.props.showOptionsWindow}
+                            handleActiveAppOptionWindow={this.props.handleActiveAppOptionWindow}
+                            moveWindow={value => { this.mousedown(value) }}
+                            showCurrentApp={name => { this.showCurrentApp(name) }}
+                            maximize={this.maximize}
+                        />
+                        : null
+                    }
+
+
+                    {this.runProgram(this.props.activeProgram)}
 
                     {this.props.activeProgram === "Program Manager" ?
                         <ProgramManager
@@ -192,4 +223,4 @@ class RenderProgramsWindow extends React.Component {
     }
 }
 
-export default RenderProgramsWindow
+export default RenderAppWindow

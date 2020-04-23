@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import "./fontello-cc97b866/css/fontello.css";
 import './index.css';
-import App from './components/App';
+import App from './components/mechanics/App';
 
 ReactDOM.render(
   <React.StrictMode>

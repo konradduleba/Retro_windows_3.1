@@ -2,7 +2,7 @@ import React from 'react'
 import BarOptionsWindow from './BarOptionsWindow'
 import AppOptionsWindow from './AppOptionsWindow'
 
-import '../styles/ShowOptionsWindow.scss'
+import '../../styles/ShowOptionsWindow.scss'
 
 const ShowOptionsWindow = props => {
     const { optionsType } = props.properties;
