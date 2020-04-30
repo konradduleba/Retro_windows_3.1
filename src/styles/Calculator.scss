@@ -1,0 +1,187 @@
+.programWindow.Calculator{
+    width: 350px;
+    height: 350px;
+    max-width: 350px;
+    max-height: 350px;
+    box-shadow: none;
+    --navBarHeight: 32px;
+
+    .resizingElements{
+        visibility: hidden;
+    }
+
+    .calculatorContainer{
+        position: absolute;
+        top: 31px;
+        left: 1px;
+        z-index: 11;
+        height: calc(100% - var(--navBarHeight));
+        width: calc(100% - 2px);
+
+        .calculatorNavigation{
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            height: 30px;
+            background-color: white;
+            border-bottom: 1px solid black;
+            line-height: 30px;
+            position: relative;
+
+            p{
+                padding: 0 10px;
+
+                &:Hover{
+                    color: white;
+                    background-color: #0800b0;
+                    cursor: pointer;
+                }
+
+                &.true{
+                    background-color: #0800b0;
+                    color: white;
+                }
+            }
+
+            .hideMenu{
+                width: 100%;
+                height: 1000%;
+                z-index: 10;
+                position: absolute;
+                top: 30px;
+                left: 0;
+            }
+
+            ul{
+                position: absolute;
+                top: 30px;
+                left: 0;
+                list-style: none;
+                border: 1px solid black;
+                background-color: white;
+                z-index: 12;
+                border-top: 0;
+
+                &.edit{
+                    border-left: 0;
+                }
+
+                &.view{
+                    left: 48px
+                }
+
+                &.help{
+                    left: 102px
+                }
+
+                li{
+                    padding: 0 10px;
+                    position: relative;
+
+                    &:hover{
+                        cursor: pointer;
+                        color: white;
+                        background-color: #0800b0;
+                    }
+
+                    &.viewType{
+                        padding: 0 10px 0 20px;
+                    }
+
+                    i{
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                    }
+
+                    &.off{
+                        color: lightgray;
+                        &:hover{
+                            background-color: white;
+                            color: lightgray;
+                            cursor: default;
+                        }
+                    }
+                }
+            }
+        }
+
+        .inputWindow{
+            position: absolute;
+            right: 20px;
+            top: 40px;
+            margin-left: 150px;
+            width: 250px;
+            text-align: right;
+            border: 1px solid black;
+
+            p{
+                margin-right: 5px;
+                padding: 6px;
+                font-size: 18px;
+                font-weight: 600;
+            }
+        }
+
+        .keysContainer{
+            margin: 50px 5px 5px 5px;
+            width: calc(100% - 10px);
+
+            ul{
+                list-style: none;
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+
+                .key{
+                    width: 50px;
+                    height: 40px;
+                    margin: 3px;
+                    border-radius: 10px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    box-sizing: border-box;
+                    font-weight: 600;
+
+                    &:hover{
+                        cursor: pointer;
+                    }
+
+                    &:nth-child(1),&:nth-child(2),&:nth-child(3){
+                        width: 65px;
+                    }
+
+                    &:nth-child(3){
+                        margin-right: 75px;
+                    }
+
+                    &.red{
+                        color: red;
+                        border: 1px solid red;
+                    }
+
+                    &.blue{
+                        color: blue;
+                        border: 1px solid blue;
+                    }
+
+                    &.pink{
+                        color: rgb(192, 18, 178);
+                        border: 1px solid rgb(192, 18, 178);
+                    }
+
+                    &.green{
+                        color: black;
+                        border: 1px solid green;
+                    }
+
+                    &.redAndBlack{
+                        color: black;
+                        border: 1px solid red;
+                    }
+                }
+            }
+        }
+    }
+}

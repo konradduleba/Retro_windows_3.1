@@ -32,7 +32,9 @@ class App extends React.Component {
     activeAppOptionWindow: {
       name: '',
       icon: '',
-    }
+    },
+    fontFamily: '',
+    fontURL: ''
   }
 
   initializedDesktopPrograms = [{
@@ -145,6 +147,7 @@ class App extends React.Component {
       }
     })
   }
+  changeFont = (fontFamily, fontURL) => this.setState({ fontFamily, fontURL })
 
   render() {
 
@@ -184,6 +187,9 @@ class App extends React.Component {
               closeOptionsWindow={this.closeOptionsWindow}
               showOptionsWindow={this.showOptionsWindow}
               handleActiveAppOptionWindow={(name, icon) => this.handleActiveAppOptionWindow(name, icon)}
+              changeFont={(fontName, fontURL) => this.changeFont(fontName, fontURL)}
+              actualFont={this.state.fontFamily}
+              actualURL={this.state.fontURL}
             />
             : null}
         </div>

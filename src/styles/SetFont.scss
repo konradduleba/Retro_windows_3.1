@@ -1,11 +1,25 @@
-.setFont{
-    position: absolute;
-    width: 380px;
-    background-color: white;
-    border: 1px solid black;
-    z-index: 14;
-    display: flex;
-    flex-direction: column;
+.programWindow.SetFont{
+    width: 400px;
+    height: 370px;
+    // max-width: 350px;
+    // max-height: 350px;
+    box-shadow: none;
+    --navBarHeight: 32px;
+
+    .resizingElements{
+        visibility: hidden;
+    }
+
+    .container{
+        .navBar{
+            button{
+    
+                &:nth-child(3){
+                    display: none;
+                }
+            }
+        }
+    }
     
     .fontContainer{
         position: relative;
@@ -65,9 +79,6 @@
             }
         }
     }
-}
-
-
 
     .sample {
         box-sizing: border-box;
@@ -100,3 +111,4 @@
             }
         }
     }
+}

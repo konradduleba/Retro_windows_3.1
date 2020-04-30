@@ -17,6 +17,9 @@ const RenderActiveApp = (props) => {
             closeOptionsWindow={props.closeOptionsWindow}
             showOptionsWindow={props.showOptionsWindow}
             handleActiveAppOptionWindow={props.handleActiveAppOptionWindow}
+            changeFont={props.changeFont}
+            actualFont={props.actualFont}
+            actualURL={props.actualURL}
         />)
     )
 }

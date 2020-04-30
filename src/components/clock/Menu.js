@@ -1,4 +1,5 @@
 import React from 'react';
+import ClockIcon from '../../img/clock.png'
 
 class Menu extends React.Component {
 
@@ -49,7 +50,7 @@ class Menu extends React.Component {
                         <p>Digital</p>
                     </li>
                     <li className="line" onClick={() => {
-                        this.props.toggleShowSetFont();
+                        this.props.addToActiveProgram('SetFont', ClockIcon);
                         this.props.handleMenu();
                     }}>
                         <i className=""></i>
@@ -79,7 +80,7 @@ class Menu extends React.Component {
                         <p>Date</p>
                     </li>
                     <li onClick={() => {
-                        this.props.toggleShowAboutProgram();
+                        this.props.addToActiveProgram('About Clock', ClockIcon)
                         this.props.handleMenu();
                     }}>
                         <i className=""></i>

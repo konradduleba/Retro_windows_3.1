@@ -3,8 +3,12 @@ import ProgramManager from '../ProgramManager';
 import NavBar from '../visual/NavBar'
 import ResizingElements from './ResizingElements'
 import Clock from '../clock/Clock'
+import Calculator from '../calculator/Calculator'
+import SetFont from '../publicCom/SetFont'
+import Help from '../publicCom/Help'
 
 import '../../styles/RenderAppWindow.scss'
+import AboutProgram from '../publicCom/AboutProgram';
 
 class RenderAppWindow extends React.Component {
 
@@ -167,8 +171,29 @@ class RenderAppWindow extends React.Component {
             closeAnalogTime={() => this.closeAnalogTime()}
             handleAnalogTime={() => this.handleAnalogTime()}
             handleActiveClockType={value => this.handleActiveClockType(value)}
+            addToActiveProgram={this.props.addToActiveProgram}
+            actualFont={this.props.actualFont}
             properties={{ name: this.props.activeProgram, icon: this.props.icon }}
         />
+        else if (name === 'Calculator') return <Calculator
+            addToActiveProgram={this.props.addToActiveProgram}
+            properties={{ name: this.props.activeProgram, icon: this.props.icon }}
+        />
+        else if (name === 'Calculator Help') return <Help />
+        else if (name === 'About Clock') return <AboutProgram
+            handleCloseWindow={this.props.handleCloseWindow}
+            properties={{ name: 'Clock', icon: this.props.icon }}
+        />
+        else if (name === 'About Calculator') return <AboutProgram
+            handleCloseWindow={this.props.handleCloseWindow}
+            properties={{ name: 'Calculator', icon: this.props.icon }}
+        />
+        else if (name === 'SetFont') return <SetFont
+            closeWindow={this.props.closeWindow}
+            properties={this.props.properties}
+            actualFont={this.props.actualFont}
+            actualURL={this.props.actualURL}
+            changeFont={this.props.changeFont} />
     }
 
     render() {

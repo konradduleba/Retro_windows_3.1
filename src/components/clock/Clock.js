@@ -2,8 +2,6 @@ import React from 'react';
 import Menu from './Menu';
 import DigitalClock from './DigitalClock';
 import AnalogClock from './AnalogClock';
-import AboutProgram from '../publicCom/AboutProgram'
-import SetFont from '../publicCom/SetFont'
 
 import '../../styles/Clock.scss';
 
@@ -20,8 +18,6 @@ class Clock extends React.Component {
         noTitle: false,
         aboutProgram: false,
         setFont: false,
-        fontFamily: null,
-        fontURL: null
     }
 
     handleMenu = () => {
@@ -42,10 +38,6 @@ class Clock extends React.Component {
 
     toggleShowTitle = () => this.setState({ noTitle: !this.state.noTitle })
     toggleShowAboutProgram = () => this.setState({ aboutProgram: !this.state.aboutProgram })
-    toggleShowSetFont = () => this.setState({ setFont: !this.state.setFont })
-    changeFontFamily = (fontName, fontURL) => {
-        this.setState({ fontFamily: `${fontName}`, fontURL })
-    }
 
     render() {
 
@@ -54,7 +46,7 @@ class Clock extends React.Component {
             height: `calc(100% - 1px)`
         }
 
-        const { menu, clockType, noTitle, aboutProgram, setFont } = this.state;
+        const { menu, clockType, noTitle } = this.state;
         return (
             <>
                 <section className='clockContainer' onDoubleClick={() => {
@@ -88,16 +80,17 @@ class Clock extends React.Component {
                                 handleActiveClockType={this.props.handleActiveClockType}
                                 toggleShowAboutProgram={this.toggleShowAboutProgram}
                                 toggleShowSetFont={this.toggleShowSetFont}
+                                addToActiveProgram={this.props.addToActiveProgram}
                             />
                             : null}
                         <aside onClick={this.handleMenu} style={{ visibility: `${this.state.visibility ? 'visible' : 'hidden'}` }}></aside>
                     </div>
-
                     <div className='datePlace'
                         style={noTitle ? { height: `${style.height}`, fontFamily: `${this.state.fontFamily}` } :
                             { fontFamily: `${this.state.fontFamily}` }}>
                         {clockType === 'digital' ?
                             <DigitalClock
+                                actualFont={this.props.actualFont}
                                 properties={this.state}
                             />
                             :
@@ -107,21 +100,6 @@ class Clock extends React.Component {
                         }
                     </div>
                 </section>
-                {aboutProgram ?
-                    <AboutProgram
-                        properties={this.props.properties}
-                        type={this.state.clockType}
-                        toggleShowAboutProgram={this.toggleShowAboutProgram}
-                    /> : null}
-
-                {setFont ?
-                    <SetFont
-                        properties={this.props.properties}
-                        actualFont={this.state.fontFamily}
-                        actualURL={this.state.fontURL}
-                        toggleShowSetFont={this.toggleShowSetFont}
-                        changeFontFamily={(fontName, fontURL) => this.changeFontFamily(fontName, fontURL)}
-                    /> : null}
             </>
         )
     }

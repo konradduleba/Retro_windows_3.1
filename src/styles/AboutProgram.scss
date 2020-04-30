@@ -1,11 +1,30 @@
-.aboutProgram{
-    position: absolute;
+.programWindow.AboutClock,.programWindow.AboutCalculator{
     width: 450px;
-    background-color: white;
-    border: 1px solid black;
-    z-index: 14;
-    display: flex;
-    flex-direction: column;
+    height: 350px;
+    // max-width: 350px;
+    // max-height: 350px;
+    box-shadow: none;
+    --navBarHeight: 32px;
+
+    .resizingElements{
+        visibility: hidden;
+    }
+}
+
+.programWindow.AboutCalculator,.programWindow.AboutClock{
+    width: 500px;
+
+    .container{
+        .navBar{
+            button{
+    
+                &:nth-child(3){
+                    display: none;
+                }
+            }
+        }
+    }
+}
 
     .aboutContainer{
         display: flex;
@@ -57,6 +76,3 @@
             padding: 5px 30px;
         }
     }
-
-    
-}

@@ -59,20 +59,38 @@ class NavBar extends React.Component {
                     closeOptionsWindow={this.closeOptionsWindow}
                     maximize={this.props.maximize}
                 /> : null}
-                <button onClick={() => {
-                    this.props.handleMinimalizeApp(name, icon);
-                    this.props.closeWindow(name)
-                }}>
-                    <i className="icon-minus-1"></i>
-                </button>
-                <p
-                    onMouseDown={() => {
-                        this.props.showCurrentApp(name);
-                        this.closeOptionsWindow()
-                    }}
-                    onContextMenu={this.showOptionsWindow}
-                    onClick={() => this.closeOptionsWindow()}>{name}{(analogTime && activeClockType === 'analog') ? ` - ${this.checkTime()}` : null}</p>
-                <button onClick={() => { this.props.handleCloseWindow(name) }}><i className="icon-cancel-1"></i></button>
+                {(name === 'About Clock' || name === 'SetFont' || name === 'About Calculator') ?
+                    <>
+                        <button onClick={() => {
+                            this.props.closeWindow(name)
+                        }}>
+                            <i className="icon-minus-1"></i>
+                        </button>
+                        <p
+                            onMouseDown={() => {
+                                this.props.showCurrentApp(name);
+                                this.closeOptionsWindow()
+                            }}
+                            onClick={() => this.closeOptionsWindow()}>{name}{(analogTime && activeClockType === 'analog') ? ` - ${this.checkTime()}` : null}</p>
+                    </>
+                    :
+                    <>
+                        <button onClick={() => {
+                            this.props.handleMinimalizeApp(name, icon);
+                            this.props.closeWindow(name)
+                        }}>
+                            <i className="icon-minus-1"></i>
+                        </button>
+                        <p
+                            onMouseDown={() => {
+                                this.props.showCurrentApp(name);
+                                this.closeOptionsWindow()
+                            }}
+                            onContextMenu={this.showOptionsWindow}
+                            onClick={() => this.closeOptionsWindow()}>{name}{(analogTime && activeClockType === 'analog') ? ` - ${this.checkTime()}` : null}</p>
+                        <button onClick={() => { this.props.handleCloseWindow(name) }}><i className="icon-cancel-1"></i></button>
+                    </>
+                }
             </div>
         )
 

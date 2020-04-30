@@ -9,7 +9,7 @@
     top: 0;
     left: 0;
     background-color: white;
-    z-index: 20;
+    z-index: 999;
     border: 1px solid black;
 
     ul{
@@ -63,6 +63,7 @@
     left: -200vw;
     width: 400vw;
     height: 400vh;
+    z-index: 998;
 }
 
 .settingsWindow{
@@ -72,7 +73,7 @@
     background-color: white;
     width: 200px;
     border: 1px solid lightgray;
-    z-index: 21;
+    z-index: 999;
     display: flex;
     flex-direction: column;
 
