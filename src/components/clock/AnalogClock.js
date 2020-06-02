@@ -46,9 +46,9 @@ class AnalogClock extends React.Component {
                     <div className="minutes-container">
                         <div className="minutes" style={this.moveArrow('m')}></div>
                     </div>
-                    {secondsTic ? <div className="seconds-container">
+                    {secondsTic && <div className="seconds-container">
                         <div className="seconds" style={this.moveArrow('s')}></div>
-                    </div> : null}
+                    </div>}
                 </article>
             </>
         )

@@ -1,15 +1,14 @@
 import React from 'react';
 
-const RenderFontList = props => {
+export default function RenderFontList({ fontList, setFontOnClick }) {
     return (
-        props.fontList.map(font =>
+        fontList.map(font =>
             <li
                 key={font.family}
-                onClick={(event) => props.setFontOnClick(event)}
+                onClick={event => setFontOnClick(event)}
                 data-key={font.family}
                 data-url={font.files.regular}
-            >{font.family}</li>)
+            >{font.family}</li>
+        )
     )
 }
-
-export default RenderFontList

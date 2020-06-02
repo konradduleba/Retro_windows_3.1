@@ -1,37 +1,36 @@
 import React from 'react';
+import { CloseSquareOutlined, BorderOutlined, MinusOutlined } from '@ant-design/icons';
 
-const BarOptionsWindow = props => {
-
-    const { top, left, name, icon } = props.properties
-    const styles = {
-        top: `${top}px`,
-        left: `${left}px`,
-    }
+export default function BarOptionsWindow({ minimalizeApp, closeActiveProgram, maximize, closeOptionsWindow, closeDesktopProgram, properties }) {
+    const { top, left, name, icon } = properties;
     return (
         <>
-            <div className='optionsWindow' style={styles}>
+            <div className='optionsWindow' style={{ top: `${top}px`, left: `${left}px`, }}>
                 <ul>
                     <li onClick={() => {
-                        props.handleMinimalizeApp(name, icon);
-                        props.closeWindow(name);
+                        minimalizeApp(name, icon);
+                        closeActiveProgram(name);
                     }}>
-                        <i className="icon-window-minimize"></i><p>Minimalizuj</p>
+                        <MinusOutlined />
+                        <p>Minimalizuj</p>
                     </li>
                     <li onClick={() => {
-                        props.maximize();
-                        props.closeOptionsWindow();
+                        maximize();
+                        closeOptionsWindow();
                     }}>
-                        <i className="icon-window-maximize"></i><p>Maksymalizuj</p>
+                        <BorderOutlined />
+                        <p>Maksymalizuj</p>
                     </li>
-                    <li onClick={() => props.handleCloseWindow(name)}>
-                        <i className="icon-window-close"></i>
+                    <li onClick={() => {
+                        closeActiveProgram(name);
+                        closeDesktopProgram(name)
+                    }}>
+                        <CloseSquareOutlined />
                         <p>Zamknij</p>
                     </li>
                 </ul>
             </div>
-            <div className='optionCloseWindow' onClick={() => props.closeOptionsWindow()}></div>
+            <div className='optionCloseWindow' onClick={() => closeOptionsWindow()}></div>
         </>
     )
 }
-
-export default BarOptionsWindow

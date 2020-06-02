@@ -114,6 +114,8 @@
             left: 0;
             background-color: white;
             border: 1px solid black;
+            border-left: 0;
+            border-top: 0;
             z-index: 12;
 
             ul{
@@ -126,7 +128,7 @@
                     height: 30px;
                     padding: 0 15px 0 0;
 
-                    i{
+                    i,span{
                         line-height: 30px;
                         width: 25px;
                     }

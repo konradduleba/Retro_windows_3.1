@@ -37,7 +37,7 @@
                 color: white;
             }
 
-            i{
+            span{
                 width: 40px;
                 height: 100%;
                 font-size: 15px;
@@ -84,11 +84,11 @@
         height: 35px;
         position: relative;
 
-        i{
+        span{
             position: absolute;
             top: 50%;
             right: 17px;
-            font-size: 25px;
+            font-size: 18px;
             transform: translate(50%,-50%);
             color: #666;
             cursor: pointer;

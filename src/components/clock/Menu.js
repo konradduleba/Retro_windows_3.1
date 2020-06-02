@@ -1,5 +1,6 @@
 import React from 'react';
 import ClockIcon from '../../img/clock.png'
+import { CheckOutlined } from '@ant-design/icons';
 
 class Menu extends React.Component {
 
@@ -11,77 +12,75 @@ class Menu extends React.Component {
     }
 
     componentDidMount() {
-        const { analogTic, digitalTic, secondsTic, dateTic } = this.props.properties
-        this.setState({
-            analogTic,
-            digitalTic,
-            secondsTic,
-            dateTic
-        })
+        const { analogTic, digitalTic, secondsTic, dateTic } = this.props.properties;
+        this.setState({ analogTic, digitalTic, secondsTic, dateTic })
     }
 
     render() {
+
+        const { properties, handleAnalogTime, handleTic, handleNoTitle, changeClockType, handleMenu, showAnalogTime, closeAnalogTime, handleActiveClockType, addToActiveProgram, toggleShowTitle } = this.props;
+        const { analogTic, digitalTic, secondsTic, dateTic } = this.state;
         return (
 
             <div className="clockMenu">
                 <ul>
                     <li onClick={() => {
-                        this.props.handleTic('analog');
-                        this.props.changeClockType('analog');
-                        this.props.handleMenu();
-                        if (this.props.properties.dateTic) {
-                            this.props.showAnalogTime();
+                        handleTic('analog');
+                        changeClockType('analog');
+                        handleMenu();
+                        if (properties.dateTic) {
+                            showAnalogTime();
                         }
-                        else this.props.closeAnalogTime();
+                        else closeAnalogTime();
 
-                        this.props.handleActiveClockType('analog')
+                        handleActiveClockType('analog')
                     }}>
-                        <i className={this.state.analogTic ? "icon-check" : null}></i>
+                        {analogTic ? <CheckOutlined /> : <i className=""></i>}
                         <p>Analog</p>
                     </li>
                     <li className="line" onClick={() => {
-                        this.props.handleTic('digital');
-                        this.props.changeClockType('digital')
-                        this.props.handleMenu();
-                        this.props.closeAnalogTime();
-                        this.props.handleActiveClockType('digital')
+                        handleTic('digital');
+                        changeClockType('digital')
+                        handleMenu();
+                        closeAnalogTime();
+                        handleActiveClockType('digital')
                     }}>
-                        <i className={this.state.digitalTic ? "icon-check" : null}></i>
+                        {digitalTic ? <CheckOutlined /> : <i className=""></i>}
                         <p>Digital</p>
                     </li>
                     <li className="line" onClick={() => {
-                        this.props.addToActiveProgram('SetFont', ClockIcon);
-                        this.props.handleMenu();
+                        addToActiveProgram('SetFont', ClockIcon);
+                        handleMenu();
                     }}>
                         <i className=""></i>
                         <p>Set Font...</p>
                     </li>
                     <li className="line" onClick={() => {
-                        this.props.handleNoTitle();
-                        this.props.handleMenu();
-                        this.props.toggleShowTitle();
+                        handleNoTitle();
+                        handleMenu();
+                        toggleShowTitle();
                     }}>
                         <i className=""></i>
                         <p>No Title</p>
                     </li>
                     <li onClick={() => {
-                        this.props.handleTic('seconds');
-                        this.props.handleMenu();
+                        handleTic('seconds');
+                        handleMenu();
                     }}>
-                        <i className={this.state.secondsTic ? "icon-check" : null}></i>
+                        {secondsTic ? <CheckOutlined /> : <i className=""></i>}
                         <p>Seconds</p>
                     </li>
                     <li className="line" onClick={() => {
-                        this.props.handleTic('date');
-                        this.props.handleMenu();
-                        this.props.handleAnalogTime('analog');
+                        handleTic('date');
+                        handleMenu();
+                        handleAnalogTime('analog');
                     }}>
-                        <i className={this.state.dateTic ? "icon-check" : null}></i>
+                        {dateTic ? <CheckOutlined /> : <i className=""></i>}
                         <p>Date</p>
                     </li>
                     <li onClick={() => {
-                        this.props.addToActiveProgram('About Clock', ClockIcon)
-                        this.props.handleMenu();
+                        addToActiveProgram('About Clock', ClockIcon)
+                        handleMenu();
                     }}>
                         <i className=""></i>
                         <p>About Clock...</p>

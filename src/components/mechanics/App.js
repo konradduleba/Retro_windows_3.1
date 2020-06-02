@@ -1,28 +1,17 @@
 import React from 'react';
-// import RenderAppWindow from './RenderAppWindow';
 import RenderAppIcon from './RenderAppIcon';
 import RenderActiveApp from './RenderActiveApp';
 import ShowOptionsWindow from '../rightClick/ShowOptionsWindow';
+import { AppIcons } from '../utils/images'
+
+import pmicons from '../../img/pmicons.png';
 
 import '../../styles/App.scss';
-
-import iconProgramManager from '../../img/programManager.png';
-import IconClock from '../../img/clock.png';
-import IconCalculator from '../../img/calculator.png';
 
 class App extends React.Component {
 
   state = {
-    desktopProgram: [{
-      name: 'Program Manager',
-      icon: iconProgramManager
-    }, {
-      name: 'Clock',
-      icon: IconClock
-    }, {
-      name: 'Calculator',
-      icon: IconCalculator
-    }],
+    desktopProgram: AppIcons,
     activeProgram: [],
     style: {
       visible: 'hidden',
@@ -34,77 +23,45 @@ class App extends React.Component {
       icon: '',
     },
     fontFamily: '',
-    fontURL: ''
+    fontURL: '',
+    addedPrograms: [],
+    programItemsPath: ''
   }
 
-  initializedDesktopPrograms = [{
-    name: 'Program Manager',
-    icon: iconProgramManager
-  }, {
-    name: 'Clock',
-    icon: IconClock
-  }, {
-    name: 'Calculator',
-    icon: IconCalculator
-  }]
-
-  addMinimalizedProgram = (name, icon) => {
-    const newTable = this.initializedDesktopPrograms.filter(program => program.name === name)
-    if (newTable.length === 0) {
-      this.initializedDesktopPrograms.push({
-        name,
-        icon
+  minimalizeApp = (name, icon) => {
+    const checkArray = this.state.desktopProgram.filter(program => program.name === name).length;
+    if (checkArray === 0)
+      this.setState(prevState => {
+        return ({
+          desktopProgram: prevState.desktopProgram.concat({ name, icon })
+        })
       })
-    }
   }
 
-  closeMinimalizedProgram = (name) => {
-    const newTable = this.initializedDesktopPrograms.filter(program => (program.name !== name || program.name === "Program Manager"))
-    if (newTable.length !== 0) {
-      this.initializedDesktopPrograms = newTable
-    }
-    this.closeWindow(name)
-  }
+  closeActiveProgram = name => this.setState({
+    activeProgram: this.state.activeProgram.filter(program => (program.name !== name))
+  })
 
-  handleMinimalizeApp = (name, icon) => {
-    this.addMinimalizedProgram(name, icon)
-
-    this.setState({
-      desktopProgram: this.initializedDesktopPrograms
-    })
-  }
-
-  closeWindow = (name) => {
-    const newTableOne = this.activeProgram.filter(program => (program.name !== name))
-    this.activeProgram = newTableOne
-
-    this.setState({
-      activeProgram: this.activeProgram
-    })
-  }
-
-  handleCloseWindow = (name) => {
-    this.closeMinimalizedProgram(name);
-    this.setState({
-      activeProgram: this.activeProgram,
-      desktopProgram: this.initializedDesktopPrograms
-    })
-  }
-
-  activeProgram = [];
+  closeDesktopProgram = name => this.setState({
+    desktopProgram: this.state.desktopProgram.filter(program => (program.name !== name || program.name === "Program Manager"))
+  })
 
   addToActiveProgram = (name, icon) => {
-    const newTableOne = this.activeProgram.filter(program => (program.name === name))
-    if (newTableOne.length === 0)
-      this.activeProgram.push({
-        name: name,
-        icon: icon
+    const checkArray = this.state.activeProgram.filter(program => (program.name === name)).length;
+    if (checkArray === 0)
+      this.setState(prevState => {
+        return ({
+          activeProgram: prevState.activeProgram.concat({ name, icon })
+        })
       })
-
-    this.setState({
-      activeProgram: this.activeProgram
-    })
   }
+
+  addGroupProgram = name => this.setState(prevState => {
+    return {
+      addedPrograms: prevState.addedPrograms.concat({ name, icon: pmicons })
+    }
+  })
+  setProgramItemsPath = programItemsPath => this.setState({ programItemsPath }, console.log(programItemsPath))
 
   removeRightClick = e => {
     e.preventDefault();
@@ -151,11 +108,13 @@ class App extends React.Component {
 
   render() {
 
+    const { desktopProgram, activeProgram, style, fontFamily, fontURL, activeAppOptionWindow } = this.state;
+
     const showOptionsProperties = {
-      top: this.state.style.top,
-      left: this.state.style.left,
-      name: this.state.activeAppOptionWindow.name,
-      icon: this.state.activeAppOptionWindow.icon,
+      top: style.top,
+      left: style.left,
+      name: activeAppOptionWindow.name,
+      icon: activeAppOptionWindow.icon,
       optionsType: 'app'
     }
 
@@ -163,35 +122,38 @@ class App extends React.Component {
       <section className="crt">
         <div className="wrapper" onContextMenu={this.removeRightClick}>
           <RenderAppIcon
-            programList={this.state.desktopProgram}
+            programList={desktopProgram}
             addToActiveProgram={(name, icon) => this.addToActiveProgram(name, icon)}
             handleActiveAppOptionWindow={(name, icon) => this.handleActiveAppOptionWindow(name, icon)}
             closeOptionsWindow={this.closeOptionsWindow}
             showOptionsWindow={this.showOptionsWindow}
           />
-          {this.state.style.visible !== 'hidden' ?
+          {style.visible !== 'hidden' &&
             <ShowOptionsWindow
               properties={showOptionsProperties}
               closeOptionsWindow={this.closeOptionsWindow}
               addToActiveProgram={(name, icon) => this.addToActiveProgram(name, icon)}
-              handleCloseWindow={value => this.handleCloseWindow(value)}
-            />
-            : null}
-          {this.state.activeProgram.length !== 0 ?
+              closeDesktopProgram={value => this.closeDesktopProgram(value)}
+              closeActiveProgram={name => this.closeActiveProgram(name)}
+            />}
+          {activeProgram.length !== 0 &&
             <RenderActiveApp
-              activeApps={this.state.activeProgram}
-              handleCloseWindow={value => this.handleCloseWindow(value)}
-              handleMinimalizeApp={(name, icon) => this.handleMinimalizeApp(name, icon)}
-              closeWindow={name => this.closeWindow(name)}
+              activeApps={activeProgram}
+              addedPrograms={this.state.addedPrograms}
               addToActiveProgram={(name, icon) => this.addToActiveProgram(name, icon)}
+              closeActiveProgram={name => this.closeActiveProgram(name)}
+              closeDesktopProgram={value => this.closeDesktopProgram(value)}
+              minimalizeApp={(name, icon) => this.minimalizeApp(name, icon)}
               closeOptionsWindow={this.closeOptionsWindow}
               showOptionsWindow={this.showOptionsWindow}
               handleActiveAppOptionWindow={(name, icon) => this.handleActiveAppOptionWindow(name, icon)}
               changeFont={(fontName, fontURL) => this.changeFont(fontName, fontURL)}
-              actualFont={this.state.fontFamily}
-              actualURL={this.state.fontURL}
-            />
-            : null}
+              setProgramItemsPath={path => this.setProgramItemsPath(path)}
+              addGroupProgram={name => this.addGroupProgram(name)}
+              path={this.state.programItemsPath}
+              actualFont={fontFamily}
+              actualURL={fontURL}
+            />}
         </div>
       </section>
     );

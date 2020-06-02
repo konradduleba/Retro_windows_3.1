@@ -43,8 +43,6 @@ body{
     .appIcon{
       width: 90px;
       height: 100px;
-      // background-color: green;
-      // margin: 10px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -71,12 +69,12 @@ body{
       p{
         position: absolute;
         margin-top: 5px;
-        // width: 100%;
         padding: 0 10%;
         font-size: 15px;
         top: 60%;
         left: 50%;
         transform: translateX(-50%);
+        text-align: center;
       }
     }
   }

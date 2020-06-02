@@ -1,7 +1,6 @@
 import React from 'react'
 
-const Keys = props => {
-
+export default function Keys({ keysTable, changeResult }) {
     const checkStyle = index => {
         if (index < 3) return 'red'
         else if (index === 3 || index === 9 || index === 15 || index === 21) return 'pink'
@@ -11,8 +10,6 @@ const Keys = props => {
     }
 
     return (
-        props.keysTable.map((key, index) => <li key={key} className={`key ${checkStyle(index)}`} onClick={() => props.changeResult(key)}>{key}</li>)
+        keysTable.map((key, index) => <li key={key} className={`key ${checkStyle(index)}`} onClick={() => changeResult(key)}>{key}</li>)
     )
 }
-
-export default Keys

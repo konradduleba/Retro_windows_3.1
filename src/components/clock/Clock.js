@@ -56,33 +56,25 @@ class Clock extends React.Component {
                     style={noTitle ? style : null}
                 >
 
-                    {!noTitle ? (
+                    {!noTitle &&
                         <nav className='clockNavigation'>
                             <p onClick={this.handleMenu}>Settings</p>
                         </nav>
-                    )
-                        : null
                     }
 
 
                     <div>
-                        {menu ?
+                        {menu &&
                             <Menu
                                 changeClockType={type => this.changeClockType(type)}
                                 handleMenu={this.handleMenu}
                                 handleTic={value => this.handleTic(value)}
                                 toggleShowTitle={this.toggleShowTitle}
                                 properties={this.state}
-                                handleNoTitle={this.props.handleNoTitle}
-                                showAnalogTime={this.props.showAnalogTime}
-                                closeAnalogTime={this.props.closeAnalogTime}
-                                handleAnalogTime={this.props.handleAnalogTime}
-                                handleActiveClockType={this.props.handleActiveClockType}
-                                toggleShowAboutProgram={this.toggleShowAboutProgram}
                                 toggleShowSetFont={this.toggleShowSetFont}
-                                addToActiveProgram={this.props.addToActiveProgram}
-                            />
-                            : null}
+                                toggleShowAboutProgram={this.toggleShowAboutProgram}
+                                {...this.props}
+                            />}
                         <aside onClick={this.handleMenu} style={{ visibility: `${this.state.visibility ? 'visible' : 'hidden'}` }}></aside>
                     </div>
                     <div className='datePlace'

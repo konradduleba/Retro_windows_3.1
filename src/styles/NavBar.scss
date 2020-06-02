@@ -25,9 +25,10 @@
             cursor: pointer;
             background-color: darkgrey;
         }
-        i{
+        svg{
             display: block;
-            font-size: 25px;
+            width: 35px;
+            font-size: 18px;
         }
 
         &:last-child{

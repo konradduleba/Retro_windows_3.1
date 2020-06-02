@@ -39,10 +39,11 @@ class SetFont extends React.Component {
     }
 
     setActualFont = () => {
+        const { actualFont, actualURL } = this.props;
         this.setState({
-            fontFamily: this.props.actualFont,
-            previousFont: this.props.actualFont,
-            previousURL: this.props.actualURL
+            fontFamily: actualFont,
+            previousFont: actualFont,
+            previousURL: actualURL
         })
     }
 
@@ -55,15 +56,16 @@ class SetFont extends React.Component {
     }
 
     setFontOnClick = e => {
+        const { fontFamily, previousURL, previousFont } = this.state;
         const choosenFont = e.target.getAttribute('data-key');
         let fontURL = e.target.getAttribute('data-url');
 
         fontURL = fontURL.replace('http:', '');
         const checkStyle = document.querySelector('head style');
         checkStyle.innerHTML = `@font-face{font-family: ${choosenFont}; src: url(${fontURL})}
-                                @font-face{font-family: ${this.state.previousFont}; src: url(${this.state.previousURL})}`;
+                                @font-face{font-family: ${previousFont}; src: url(${previousURL})}`;
 
-        if (choosenFont !== this.state.fontFamily) {
+        if (choosenFont !== fontFamily) {
             this.setState({
                 fontFamily: choosenFont,
                 fontURL
@@ -73,30 +75,36 @@ class SetFont extends React.Component {
 
     render() {
 
+        const { fontFamily, fontList, fontURL } = this.state;
+        const { changeFont, closeActiveProgram } = this.props;
         return (
             <div className='fontContainer'>
                 <div className="chooseFont">
                     <p>Font</p>
-                    <input type="text" defaultValue={this.state.fontFamily} onChange={this.findFont}></input>
+                    <input type="text" defaultValue={fontFamily} onChange={this.findFont}></input>
                     <ul className="fontList">
-                        {this.state.fontList !== null ?
+                        {fontList !== null &&
                             <RenderFontList
-                                fontList={this.state.fontList}
+                                fontList={fontList}
                                 setFontOnClick={this.setFontOnClick}
-                            /> : null}
+                            />
+                        }
                     </ul>
                 </div>
                 <div className="fontButtons">
                     <button onClick={() => {
-                        this.props.changeFont(this.state.fontFamily, this.state.fontURL);
-                        this.props.closeWindow('SetFont');
+                        changeFont(fontFamily, fontURL);
+                        closeActiveProgram('SetFont');
                     }}>OK</button>
-                    <button onClick={() => this.props.handleCloseWindow('SetFont')}>Cancel</button>
+                    <button onClick={() => {
+                        // closeDesktopProgram('SetFont');
+                        closeActiveProgram('SetFont');
+                    }}>Cancel</button>
                 </div>
                 <div className="sample">
                     <div className="samplePlace">
                         <p className="sampleTitle">Sample</p>
-                        <p className="sampleTxt" style={{ fontFamily: `${this.state.fontFamily}` }}>AaBbYyZz</p>
+                        <p className="sampleTxt" style={{ fontFamily: `${fontFamily}` }}>AaBbYyZz</p>
                     </div>
                 </div>
             </div>

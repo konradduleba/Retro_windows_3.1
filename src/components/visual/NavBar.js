@@ -1,6 +1,8 @@
 import React from 'react';
 import '../../styles/NavBar.scss';
+import { CloseOutlined, MinusOutlined } from '@ant-design/icons';
 import ShowOptionsWindow from '../rightClick/ShowOptionsWindow';
+import { ProgramsWithoutExit } from '../utils/navBarSettings'
 
 class NavBar extends React.Component {
 
@@ -37,58 +39,53 @@ class NavBar extends React.Component {
         return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
     }
 
+    checkProgramVisibility = name => ProgramsWithoutExit.includes(name)
+
     render() {
-        const { name, icon, analogTime, activeClockType } = this.props.properties;
-        const showOptionsProperties = {
-            name,
-            icon,
-            top: this.state.top,
-            left: this.state.left,
-            optionsType: 'bar'
-        }
+        const { moveWindow, showCurrentApp, properties, closeDesktopProgram, minimalizeApp, closeActiveProgram } = this.props;
+        const { name, icon, analogTime, activeClockType } = properties;
+        const { top, left, visible } = this.state;
+        const showOptionsProperties = { name, icon, top, left, optionsType: 'bar' }
         return (
-            <div className="navBar" onMouseDown={this.props.moveWindow.bind(this)}>
-                {this.state.visible !== 'hidden' ? <ShowOptionsWindow
+            <div className="navBar" onMouseDown={moveWindow.bind(this)}>
+                {visible !== 'hidden' && <ShowOptionsWindow
+                    {...this.props}
                     properties={showOptionsProperties}
-                    handleCloseWindow={this.props.handleCloseWindow}
-                    handleMinimalizeApp={this.props.handleMinimalizeApp}
-                    closeWindow={this.props.closeWindow}
-                    addToActiveProgram={this.props.addToActiveProgram}
-                    showOptionsWindow={this.props.showOptionsWindow}
-                    handleActiveAppOptionWindow={this.props.handleActiveAppOptionWindow}
                     closeOptionsWindow={this.closeOptionsWindow}
-                    maximize={this.props.maximize}
-                /> : null}
-                {(name === 'About Clock' || name === 'SetFont' || name === 'About Calculator') ?
+                />}
+                {this.checkProgramVisibility(name) ?
                     <>
-                        <button onClick={() => {
-                            this.props.closeWindow(name)
-                        }}>
-                            <i className="icon-minus-1"></i>
+                        <button onClick={() => closeActiveProgram(name)}>
+                            <MinusOutlined />
                         </button>
                         <p
                             onMouseDown={() => {
-                                this.props.showCurrentApp(name);
+                                showCurrentApp(name);
                                 this.closeOptionsWindow()
                             }}
-                            onClick={() => this.closeOptionsWindow()}>{name}{(analogTime && activeClockType === 'analog') ? ` - ${this.checkTime()}` : null}</p>
+                            onClick={() => this.closeOptionsWindow()}>{name}{(analogTime && activeClockType === 'analog') && ` - ${this.checkTime()}`}
+                        </p>
                     </>
                     :
                     <>
                         <button onClick={() => {
-                            this.props.handleMinimalizeApp(name, icon);
-                            this.props.closeWindow(name)
+                            minimalizeApp(name, icon);
+                            closeActiveProgram(name)
                         }}>
-                            <i className="icon-minus-1"></i>
+                            <MinusOutlined />
                         </button>
                         <p
                             onMouseDown={() => {
-                                this.props.showCurrentApp(name);
+                                showCurrentApp(name);
                                 this.closeOptionsWindow()
                             }}
                             onContextMenu={this.showOptionsWindow}
-                            onClick={() => this.closeOptionsWindow()}>{name}{(analogTime && activeClockType === 'analog') ? ` - ${this.checkTime()}` : null}</p>
-                        <button onClick={() => { this.props.handleCloseWindow(name) }}><i className="icon-cancel-1"></i></button>
+                            onClick={() => this.closeOptionsWindow()}>{name}{(analogTime && activeClockType === 'analog') ? ` - ${this.checkTime()}` : null}
+                        </p>
+                        <button onClick={() => {
+                            closeActiveProgram(name)
+                            closeDesktopProgram(name)
+                        }}><CloseOutlined /></button>
                     </>
                 }
             </div>

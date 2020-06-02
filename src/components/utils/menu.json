@@ -1,0 +1,46 @@
+[
+    {
+        "name": "File",
+        "elements": [
+            "New...",
+            "Open",
+            "Move...",
+            "Copy...",
+            "Delete",
+            "Properties...",
+            "Run...",
+            "Exit Windows..."
+        ]
+    },
+    {
+        "name": "Options",
+        "elements": [
+            "Auto Arrange",
+            "Minimize on Use",
+            "Save Settings on Exit"
+        ]
+    },
+    {
+        "name": "Window",
+        "elements": [
+            "Cascade",
+            "Tile",
+            "Arrange Icons",
+            "1 Accessories",
+            "2 Games",
+            "3 StartUp",
+            "4 Main",
+            "5 Microsoft Visual Basic"
+        ]
+    },
+    {
+        "name": "Help",
+        "elements": [
+            "Contents",
+            "Search for Help on...",
+            "How to Use Help",
+            "Windows Tutorial",
+            "About Program Manager..."
+        ]
+    }
+]

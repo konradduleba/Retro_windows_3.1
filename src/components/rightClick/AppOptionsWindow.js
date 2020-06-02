@@ -61,31 +61,25 @@ class AppOptionsWindow extends React.Component {
 
     render() {
 
-        const styles = {
-            top: `${this.state.top}px`,
-            left: `${this.state.left}px`
-        }
+        const { top, left, settings } = this.state;
 
         return (
             <>
-                {this.state.settings !== 'visible' ?
+                {settings !== 'visible' ?
                     <OptionsWindow
-                        properties={this.props.properties}
+                        {...this.props}
                         showSettingsWindow={this.showSettingsWindow}
-                        addToActiveProgram={this.props.addToActiveProgram}
-                        closeOptionsWindow={this.props.closeOptionsWindow}
-                        handleCloseWindow={this.props.handleCloseWindow}
                     />
                     :
-                    <div className='settingsWindow' ref={(el) => {
-                        if (el !== null) this.element = el.getBoundingClientRect()
-                    }}
-                        style={styles}
-                    >
+                    <div
+                        className='settingsWindow'
+                        style={{ top: `${top}px`, left: `${left}px` }}
+                        ref={(el) => {
+                            if (el !== null) this.element = el.getBoundingClientRect()
+                        }}>
                         <SettingsWindow
-                            properties={this.props.properties}
+                            {...this.props}
                             mousedown={this.mousedown}
-                            closeOptionsWindow={this.props.closeOptionsWindow}
                             programNameChange={this.programNameChange}
                         />
                     </div>

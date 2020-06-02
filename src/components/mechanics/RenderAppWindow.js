@@ -1,14 +1,20 @@
 import React from 'react';
-import ProgramManager from '../ProgramManager';
 import NavBar from '../visual/NavBar'
 import ResizingElements from './ResizingElements'
 import Clock from '../clock/Clock'
 import Calculator from '../calculator/Calculator'
 import SetFont from '../publicCom/SetFont'
 import Help from '../publicCom/Help'
+import RenderIconsInWindow from '../mechanics/RenderIconsInWindow'
+import New from '../program manager/New'
+import ProgramGroupProperties from '../program manager/ProgramGroupProperties'
+import ProgramItemsProperties from '../program manager/ProgramItemsProperties'
+import InvalidPath from '../program manager/InvalidPath'
 
 import '../../styles/RenderAppWindow.scss'
+import '../../styles/PMessentials.scss'
 import AboutProgram from '../publicCom/AboutProgram';
+
 
 class RenderAppWindow extends React.Component {
 
@@ -155,93 +161,109 @@ class RenderAppWindow extends React.Component {
             borderRadius: 0
         })
     }
-
     handleNoTitle = () => this.setState({ noTitle: !this.state.noTitle })
     showAnalogTime = () => this.setState({ analogTime: true })
     handleAnalogTime = () => this.setState({ analogTime: !this.state.analogTime })
     closeAnalogTime = () => this.setState({ analogTime: false })
-    handleActiveClockType = value => {
-        this.setState({ activeClockType: `${value}` })
-    }
+    handleActiveClockType = value => this.setState({ activeClockType: `${value}` })
 
-    runProgram = name => {
-        if (name === 'Clock') return <Clock
+    runProgram = ProgramName => {
+        const { activeProgram: name, icon } = this.props;
+        if (ProgramName === 'Clock') return <Clock
+            {...this.props}
             handleNoTitle={() => this.handleNoTitle()}
             showAnalogTime={() => this.showAnalogTime()}
             closeAnalogTime={() => this.closeAnalogTime()}
             handleAnalogTime={() => this.handleAnalogTime()}
             handleActiveClockType={value => this.handleActiveClockType(value)}
-            addToActiveProgram={this.props.addToActiveProgram}
-            actualFont={this.props.actualFont}
-            properties={{ name: this.props.activeProgram, icon: this.props.icon }}
+            properties={{ name: name, icon: icon }}
         />
-        else if (name === 'Calculator') return <Calculator
-            addToActiveProgram={this.props.addToActiveProgram}
-            properties={{ name: this.props.activeProgram, icon: this.props.icon }}
+        else if (ProgramName === 'Calculator') return <Calculator
+            {...this.props}
+            properties={{ name, icon }}
         />
-        else if (name === 'Calculator Help') return <Help />
-        else if (name === 'About Clock') return <AboutProgram
-            handleCloseWindow={this.props.handleCloseWindow}
-            properties={{ name: 'Clock', icon: this.props.icon }}
+        else if (ProgramName === 'Calculator Help') return <Help />
+        else if (ProgramName === 'About Clock') return <AboutProgram
+            {...this.props}
+            properties={{ name: 'Clock', icon }}
         />
-        else if (name === 'About Calculator') return <AboutProgram
-            handleCloseWindow={this.props.handleCloseWindow}
-            properties={{ name: 'Calculator', icon: this.props.icon }}
+        else if (ProgramName === 'About Calculator') return <AboutProgram
+            {...this.props}
+            properties={{ name: 'Calculator', icon }}
         />
-        else if (name === 'SetFont') return <SetFont
-            closeWindow={this.props.closeWindow}
-            properties={this.props.properties}
-            actualFont={this.props.actualFont}
-            actualURL={this.props.actualURL}
-            changeFont={this.props.changeFont} />
+        else if (ProgramName === 'SetFont') return <SetFont {...this.props} />
+        else if (ProgramName === 'Accessories') return <RenderIconsInWindow
+            {...this.props}
+            type="accessories"
+        />
+        else if (ProgramName === 'Games') return <RenderIconsInWindow
+            {...this.props}
+            type="games"
+        />
+        else if (ProgramName === 'StartUp') return <RenderIconsInWindow
+            {...this.props}
+            type="startup"
+        />
+        else if (ProgramName === 'About Program Manager') return <AboutProgram
+            {...this.props}
+            properties={{ name: 'Program Manager', icon }}
+        />
+        else if (ProgramName === 'Microsoft Visual Basic') return <RenderIconsInWindow
+            {...this.props}
+            type="mvb"
+        />
+        else if (ProgramName === 'Main') return <RenderIconsInWindow
+            {...this.props}
+            type="main"
+        />
+        else if (ProgramName === 'Program Manager') return <RenderIconsInWindow
+            {...this.props}
+            type="programManager"
+        />
+        else if (ProgramName === 'Control Panel') return <RenderIconsInWindow
+            {...this.props}
+            type="controlPanel"
+        />
+        else if (ProgramName === 'New Program Object') return <New
+            {...this.props}
+        />
+        else if (ProgramName === 'Program Group Properties') return <ProgramGroupProperties
+            {...this.props}
+        />
+        else if (ProgramName === 'Program Items Properties') return <ProgramItemsProperties
+            {...this.props}
+        />
+        else if (ProgramName === 'Invalid Path') return <InvalidPath
+            {...this.props}
+        />
     }
 
     render() {
-        const navBarProperties = {
-            name: this.props.activeProgram,
-            icon: this.props.icon,
-            top: this.state.top,
-            left: this.state.left,
-            analogTime: this.state.analogTime,
-            activeClockType: this.state.activeClockType
-        }
+        const { activeProgram: name, icon } = this.props;
+        const { top, left, analogTime, activeClockType } = this.state;
+        const navBarProperties = { name, icon, top, left, analogTime, activeClockType }
+
         return (
-            <section className={`programWindow ${this.props.activeProgram.replace(/ /g, '')}`} ref={(el) => {
+            <section className={`programWindow ${name.replace(/ /g, '')}`} ref={el => {
                 if (el !== null) this.element = el.getBoundingClientRect()
             }}
-                style={this.state} onClick={(name) => this.showCurrentApp(this.props.activeProgram)}>
+                style={this.state}
+                onClick={() => this.showCurrentApp(name)}>
                 <ul className="resizingElements">
-                    <ResizingElements resize={(event) => this.mousedownResize(event)} />
+                    <ResizingElements resize={event => this.mousedownResize(event)} />
                 </ul>
                 <div className="container">
-                    {!this.state.noTitle ?
+                    {!this.state.noTitle &&
                         <NavBar
+                            {...this.props}
                             properties={navBarProperties}
-                            handleCloseWindow={this.props.handleCloseWindow}
-                            handleMinimalizeApp={this.props.handleMinimalizeApp}
-                            closeWindow={this.props.closeWindow}
-                            addToActiveProgram={this.props.addToActiveProgram}
-                            showOptionsWindow={this.props.showOptionsWindow}
-                            handleActiveAppOptionWindow={this.props.handleActiveAppOptionWindow}
                             moveWindow={value => { this.mousedown(value) }}
                             showCurrentApp={name => { this.showCurrentApp(name) }}
                             maximize={this.maximize}
                         />
-                        : null
                     }
 
-
-                    {this.runProgram(this.props.activeProgram)}
-
-                    {this.props.activeProgram === "Program Manager" ?
-                        <ProgramManager
-                            handleMinimalizeApp={this.props.handleMinimalizeApp}
-                            addToActiveProgram={this.props.addToActiveProgram}
-                            closeOptionsWindow={this.props.closeOptionsWindow}
-                            showOptionsWindow={this.props.showOptionsWindow}
-                            handleActiveAppOptionWindow={this.props.handleActiveAppOptionWindow}
-                            handleCloseWindow={this.props.handleCloseWindow}
-                        /> : null}
+                    {this.runProgram(name)}
                 </div>
             </section>
         )

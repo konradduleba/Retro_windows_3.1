@@ -1,19 +1,18 @@
 import React from 'react';
 
-const RenderAppIcon = props => {
+export default function RenderAppIcon({ programList, addToActiveProgram, showOptionsWindow, handleActiveAppOptionWindow }) {
     return (
-        props.programList.map(program => (
-            <div onClick={() => { props.addToActiveProgram(program.name, program.icon) }} onContextMenu={(event) => {
-                props.showOptionsWindow(event);
-                props.handleActiveAppOptionWindow(program.name, program.icon);
-            }}
+        programList.map(program => (
+            <div
                 className="appIcon"
                 key={program.name}
-            >
-                <img src={program.icon} alt={program.name}></img>
+                onClick={() => { addToActiveProgram(program.name, program.icon) }}
+                onContextMenu={(event) => {
+                    showOptionsWindow(event);
+                    handleActiveAppOptionWindow(program.name, program.icon);
+                }}>
+                <img src={program.icon} alt={program.name} />
                 <p>{program.name}</p>
             </div>))
     )
 }
-
-export default RenderAppIcon

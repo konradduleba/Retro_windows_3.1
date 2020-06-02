@@ -79,24 +79,30 @@ class Calculator extends React.Component {
                 if (result !== null) {
                     switch (value) {
                         case '/':
+                            this.setResult();
                             this.setOperatorValue(value);
                             break;
                         case '*':
+                            this.setResult();
                             this.setOperatorValue(value);
                             break;
                         case '-':
+                            this.setResult();
                             this.setOperatorValue(value);
                             break;
                         case '+':
+                            this.setResult();
                             this.setOperatorValue(value);
                             break;
                         case '=':
                             this.setResult();
                             break;
                         case '%':
+                            this.setResult();
                             this.setOperatorValue(value);
                             break;
                         case 'sqrt':
+                            this.setResult();
                             this.setOperatorValue(value);
                             this.setState({ result: `${this.roots()}`, operator: null, number: null })
                             break;
@@ -104,9 +110,11 @@ class Calculator extends React.Component {
                             this.setState({ result: `${this.back()}` })
                             break;
                         case '1/x':
+                            this.setResult();
                             this.setState({ result: `${this.oneDividedBy()}`, operator: null, number: null })
                             break;
                         case '+/-':
+                            this.setResult();
                             this.setState({ result: `${this.multiplyByMinusOne()}`, operator: null, number: null })
                             break;
                         default:
@@ -153,8 +161,7 @@ class Calculator extends React.Component {
                 <section className="calculatorContainer">
                     <div className="calculatorNavigation">
                         <Menu
-                            addToActiveProgram={this.props.addToActiveProgram}
-                            properties={this.props.properties}
+                            {...this.props}
                             toggleShowAboutProgram={this.toggleShowAboutProgram}
                             copyValue={this.copyValue}
                             pasteValue={this.pasteValue}

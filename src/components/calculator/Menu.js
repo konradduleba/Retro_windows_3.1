@@ -39,6 +39,7 @@ class Menu extends React.Component {
     }
     render() {
         const { edit, view, help, activePaste } = this.state;
+        const { copyValue, pasteValue, addToActiveProgram } = this.props;
         return (
             <>
                 <p onClick={() => this.extendMenuOptions('e')} className={`${edit}`}>Edit</p>
@@ -47,12 +48,12 @@ class Menu extends React.Component {
                 {edit ? <ul className='edit'>
                     <li onClick={() => {
                         this.hideMenu();
-                        this.props.copyValue();
+                        copyValue();
                         this.activePaste();
                     }}>Copy Ctrl+C</li>
                     <li onClick={() => {
                         this.hideMenu();
-                        this.props.pasteValue();
+                        pasteValue();
                     }} className={`${activePaste}`}>Paste Ctrl+V</li>
                 </ul>
                     : null}
@@ -65,25 +66,25 @@ class Menu extends React.Component {
                     }}><i className='icon-check'></i>Standard</li>
                 </ul>
                     : null}
-                {help ? <ul className='help'>
+                {help && <ul className='help'>
                     <li onClick={() => {
-                        this.props.addToActiveProgram('Calculator Help', CalculatorHelpIcon);
+                        addToActiveProgram('Calculator Help', CalculatorHelpIcon);
                         this.hideMenu();
                     }}>Contents</li>
                     <li onClick={() => {
-                        this.props.addToActiveProgram('Calculator Help', CalculatorHelpIcon);
+                        addToActiveProgram('Calculator Help', CalculatorHelpIcon);
                         this.hideMenu();
                     }}>Search for Help On..</li>
                     <li onClick={() => {
-                        this.props.addToActiveProgram('Calculator Help', CalculatorHelpIcon);
+                        addToActiveProgram('Calculator Help', CalculatorHelpIcon);
                         this.hideMenu();
                     }}>How to Use Help</li>
                     <li onClick={() => {
-                        this.props.addToActiveProgram('About Calculator', CalculatorIcon);
+                        addToActiveProgram('About Calculator', CalculatorIcon);
                         this.hideMenu();
                     }}>About Calculator</li>
                 </ul>
-                    : null}
+                }
                 {(edit || view || help) ? <div className='hideMenu' onClick={() => this.hideMenu()}></div> : null}
 
             </>

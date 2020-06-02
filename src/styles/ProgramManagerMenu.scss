@@ -1,0 +1,107 @@
+.hideMenu{
+    position: absolute;
+    top: 31px;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 31px);
+}
+
+.appList .menu{
+    border-bottom: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    height: 35px;
+
+    div{
+        display: flex;
+        position: relative;
+
+        p{
+            height: 100%;
+            padding: 0 15px;
+            display: flex;
+            align-items: center;
+            z-index: 40;
+
+            &:hover{
+                background-color: #0800B0;
+                color: white;
+                cursor: pointer;
+            }
+
+            &.true{
+                background-color:#0800B0 ;
+                color: white;
+            }
+        }
+    
+        ul{
+            visibility: hidden;
+            background-color: white;
+            position: absolute;
+            top: 35px;
+            left: 0;
+            list-style: none;
+            border: 1px solid black;
+            border-top: 0;
+            z-index: 41;
+
+            &.File{
+                min-width: 150px;
+                border-left: 0;
+
+                li{
+                    &:nth-last-child(1), &:nth-last-child(2){
+                        border-top: 1px solid black;
+                    }
+                }
+            }
+
+            &.Options{
+                min-width: 190px;
+            }
+
+            &.Window{
+                min-width: 210px;
+
+                li{
+                    &:nth-child(4){
+                        border-top: 1px solid black;
+                    }
+                }
+            }
+
+            &.Help{
+                min-width: 220px;
+
+                li{
+                    &:nth-child(3), &:nth-last-child(1){
+                        border-top: 1px solid black;
+                    }
+                }
+            }
+
+            li{
+                height: 35px;
+                padding: 0 15px;
+                display: flex;
+                align-items: center;
+
+                &:hover{
+                    background-color: #0800B0;
+                    color: white;
+                    cursor: pointer;
+                }
+            }
+
+            &.true{
+                visibility: visible;
+            }
+            &.false{
+                visibility: hidden;
+            }
+        }
+    }
+
+    
+}

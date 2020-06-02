@@ -64,9 +64,10 @@ class DigitalClock extends React.Component {
 
     render() {
         const { hour, minute } = this.state;
+        const { actualFont } = this.props;
         return (
             <>
-                <p style={{ fontFamily: `${this.props.actualFont}` }}>
+                <p style={{ fontFamily: `${actualFont}` }}>
                     {hour % 12 ? hour % 12 : '12'}
                     <span>:</span>
                     {minute < 10 ? `0${minute}` : minute}
@@ -74,7 +75,7 @@ class DigitalClock extends React.Component {
                     <span></span>
                     {hour < 13 ? "AM" : "PM"}
                 </p>
-                <p style={{ fontFamily: `${this.props.actualFont}` }}>
+                <p style={{ fontFamily: `${actualFont}` }}>
                     {this.checkSeconds('date')}
                 </p>
             </>

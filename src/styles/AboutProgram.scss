@@ -1,8 +1,6 @@
-.programWindow.AboutClock,.programWindow.AboutCalculator{
+.programWindow.AboutClock,.programWindow.AboutCalculator, .programWindow.AboutProgramManager{
     width: 450px;
     height: 350px;
-    // max-width: 350px;
-    // max-height: 350px;
     box-shadow: none;
     --navBarHeight: 32px;
 
@@ -11,17 +9,16 @@
     }
 }
 
-.programWindow.AboutCalculator,.programWindow.AboutClock{
+.programWindow.AboutCalculator{
     width: 500px;
+}
 
-    .container{
-        .navBar{
-            button{
-    
-                &:nth-child(3){
-                    display: none;
-                }
-            }
+.programWindow.AboutProgramManager{
+    width: 550px;
+
+    .aboutContainer{
+        img{
+            height: 70px;
         }
     }
 }

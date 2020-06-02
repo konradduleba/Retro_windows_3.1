@@ -1,37 +1,34 @@
 import React from 'react';
+import { CloseOutlined, UpOutlined, SettingOutlined } from '@ant-design/icons';
 
-const OptionsWindow = props => {
-    const { top, left, name, icon } = props.properties;
-    const styles = {
-        top: `${top}px`,
-        left: `${left}px`
-    }
+export default function OptionsWindow({ addToActiveProgram, closeOptionsWindow, closeDesktopProgram, closeActiveProgram, showSettingsWindow, properties }) {
+    const { top, left, name, icon } = properties;
     return (
         <>
-            <div className='optionsWindow' style={styles}>
+            <div className='optionsWindow' style={{ top: `${top}px`, left: `${left}px` }}>
                 <ul>
                     <li onClick={() => {
-                        props.addToActiveProgram(name, icon);
-                        props.closeOptionsWindow();
+                        addToActiveProgram(name, icon);
+                        closeOptionsWindow();
                     }}>
-                        <i className='icon-up-open'></i><p>Otwórz</p>
+                        <UpOutlined />
+                        <p>Otwórz</p>
                     </li>
                     <li onClick={() => {
-                        props.handleCloseWindow(name);
-                        props.closeOptionsWindow();
+                        closeDesktopProgram(name);
+                        closeActiveProgram(name);
+                        closeOptionsWindow();
                     }}>
-                        <i className="icon-window-close"></i>
+                        <CloseOutlined />
                         <p>Zamknij</p>
                     </li>
-                    <li onClick={() => props.showSettingsWindow()}>
-                        <i className="icon-cog"></i>
+                    <li onClick={() => showSettingsWindow()}>
+                        <SettingOutlined />
                         <p>Ustawienia</p>
                     </li>
                 </ul>
             </div>
-            <div className='optionCloseWindow' onClick={() => props.closeOptionsWindow()}></div>
+            <div className='optionCloseWindow' onClick={() => closeOptionsWindow()}></div>
         </>
     )
 }
-
-export default OptionsWindow
