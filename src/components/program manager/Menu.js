@@ -53,6 +53,10 @@ export default function Menu({ menuList, addToActiveProgram }) {
         else if (element === '4 Main') addToActiveProgram('Main')
         else if (element === '5 Microsoft Visual Basic') addToActiveProgram('Microsoft Visual Basic')
         else if (element === 'New...') addToActiveProgram('New Program Object')
+        else if (element === 'Run...') addToActiveProgram('Run')
+        else if (element === 'Delete') addToActiveProgram('Delete')
+        else if (element === 'Move...') addToActiveProgram('Move')
+        else if (element === 'Copy...') addToActiveProgram('Copy')
     }
 
     const checkActive = activeE => {

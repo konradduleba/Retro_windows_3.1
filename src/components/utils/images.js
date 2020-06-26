@@ -118,3 +118,84 @@ export const MainIcons = [{
     name: 'Control Panel',
     icon: ControlPanel
 }];
+
+export const BrowsePrograms = [{
+    name: 'Color.exe',
+    withoutExe: 'Color',
+    icon: Color
+},
+{
+    name: 'Fonts.exe',
+    withoutExe: 'Fonts',
+    icon: Fonts
+},
+{
+    name: 'Ports.exe',
+    withoutExe: 'Ports',
+    icon: Ports
+},
+{
+    name: 'Mouse.exe',
+    withoutExe: 'Mouse',
+    icon: Mouse
+},
+{
+    name: 'Desktop.exe',
+    withoutExe: 'Desktop',
+    icon: Desktop
+},
+{
+    name: 'Keyboard.exe',
+    withoutExe: 'Keyboard',
+    icon: Keyboard
+},
+{
+    name: 'Printers.exe',
+    withoutExe: 'Printers',
+    icon: Printers
+},
+{
+    name: 'International.exe',
+    withoutExe: 'International',
+    icon: International
+},
+{
+    name: 'Date/Time.exe',
+    withoutExe: 'Date/Time',
+    icon: DateTime
+},
+{
+    name: 'Drivers.exe',
+    withoutExe: 'Drivers',
+    icon: Drivers
+},
+{
+    name: 'Sound.exe',
+    withoutExe: 'Sound',
+    icon: Sound
+},
+{
+    name: 'Control Panel.sys',
+    withoutExe: 'Control Panel',
+    icon: ControlPanel
+},
+{
+    name: 'Program Manager.sys',
+    withoutExe: 'Program Manager',
+    icon: ProgramManager
+},
+{
+    name: 'Microsoft Visual Basic.exe',
+    withoutExe: 'Microsoft Visual Basic',
+    icon: McVB
+},
+{
+    name: 'Solitaire.exe',
+    withoutExe: 'Solitaire',
+    icon: Solitaire
+},
+{
+    name: 'Minesweeper.exe',
+    withoutExe: 'Minesweeper',
+    icon: Minesweeper
+}]

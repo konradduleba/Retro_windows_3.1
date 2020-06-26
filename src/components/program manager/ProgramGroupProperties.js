@@ -1,13 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
-export default function ProgramGroupProperties({ addToActiveProgram, closeActiveProgram, addGroupProgram }) {
+import { BrowsePrograms } from '../utils/images';
+
+export default function ProgramGroupProperties({ addToActiveProgram, addedProgramsByUser, addedPrograms, closeActiveProgram, addGroupProgram }) {
     const [isDisabled, handleDisabled] = useState(true);
     const [describe, changeDescribe] = useState('');
     const [groupFile, changeGroupFile] = useState('');
 
+    const checkProgramName = () => {
+        const allProgramList = BrowsePrograms.concat(addedProgramsByUser, addedPrograms);
+        if (!(allProgramList.filter(program => program.name.toLowerCase() === describe.toLowerCase()).length)) return true;
+        else return false
+    }
+
     function handleSendButton() {
-        closeActiveProgram('Program Group Properties');
-        addGroupProgram(`${describe}`);
+        if (checkProgramName()) {
+            closeActiveProgram('Program Group Properties');
+            addGroupProgram(`${describe}`);
+        }
+        else return addToActiveProgram('Wrong Directory Name');
     }
 
     const handleChange = target => {
@@ -32,7 +43,7 @@ export default function ProgramGroupProperties({ addToActiveProgram, closeActive
                 </div>
             </div>
             <div className="buttons">
-                <button onClick={() => handleSendButton()} disabled={isDisabled}>OK</button>
+                <button onClick={handleSendButton} disabled={isDisabled}>OK</button>
                 <button onClick={() => closeActiveProgram('Program Group Properties')}>Cancel</button>
                 <button onClick={() => addToActiveProgram('Calculator Help')}>Help</button>
             </div>

@@ -3,11 +3,9 @@
         "name": "File",
         "elements": [
             "New...",
-            "Open",
             "Move...",
             "Copy...",
             "Delete",
-            "Properties...",
             "Run...",
             "Exit Windows..."
         ]

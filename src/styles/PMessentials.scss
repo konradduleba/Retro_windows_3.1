@@ -1,4 +1,4 @@
-.NewProgramObject,.ProgramGroupProperties,.ProgramItemsProperties,.InvalidPath{
+.NewProgramObject,.WrongProgramName,.WrongDirectoryName,.Copy,.Run,.Move,.ProgramGroupProperties,.ProgramItemsProperties,.InvalidPath,.ProgramItemsBrowse,.InvalidPathBrowse,.ChangeIcon,.Delete{
     width: 310px;
     height: 150px;
     box-shadow: none;
@@ -80,6 +80,18 @@
         display: flex;
         flex-direction: row;
 
+        .firstline,.secondline{
+            display: flex;
+            flex-direction: row;
+            position: relative;
+        }
+
+        .secondline{
+            position: absolute;
+            top: 180px;
+            left: 50px;
+        }
+
         .main, .buttons{
             display: flex;
             flex-direction: row;
@@ -112,6 +124,18 @@
                 padding: 2px;
             }
 
+            .minimized{
+                display: flex;
+                flex-direction: row;
+                margin-top: 10px;
+                margin-bottom: 25px;
+                
+                label{
+                    margin-left: 10px;
+                    margin-top: 3px;
+                }
+            }
+
         }
 
         .buttons{
@@ -130,7 +154,7 @@
 
 .ProgramItemsProperties{
     width: 500px;
-    height: 220px;   
+    height: unset;   
     .PGPcontent{
         .main{
             input{
@@ -139,6 +163,16 @@
                 &:nth-last-child(1){
                     margin-top: 5px
                 }
+
+                &:nth-child(2){
+                    text-transform: uppercase;
+                }
+            }
+
+            select{
+                margin-top: 5px;
+                font-size: 15px;
+                padding: 1px;
             }
 
             
@@ -162,7 +196,7 @@
     }
 }
 
-.InvalidPath{
+.InvalidPath,.WrongProgramName,.WrongDirectoryName{
     width: unset;
 
     .main{    
@@ -195,6 +229,267 @@
                 &:nth-last-child(1){
                     margin-left: 15px;
                 }
+            }
+        }
+    }
+}
+
+.ProgramItemsBrowse{
+    width: unset;
+    height: unset;
+    
+    .main{
+        padding: 20px;
+        display: flex;
+        flex-direction: row;
+
+        .file__name{
+            width: 210px;
+
+            input{
+                padding: 2px;
+                font-size: 15px;
+            }
+
+            ul{
+                margin: 10px 0 20px;
+                list-style: none;
+                width: 200px;
+                height: 150px;
+                border: 1px solid black;
+                overflow: hidden;
+                overflow-y: auto;
+
+                li{
+                    padding: 2px;
+
+                    &:hover{
+                        color: white;
+                        background-color: #0800B0;
+                        cursor: pointer;
+                    }
+                }
+            }
+
+            select{
+                margin-top: 5px;
+                padding: 5px 2px;
+                width: 200px;
+
+                option:checked{
+                    border: 0;
+                }
+            }
+        }
+
+        .directories{
+            display: flex;
+            flex-direction: column;
+            margin-left: 10px;
+            p{
+                padding: 3px 0;
+
+                &.dirPlace{
+                    font-weight: bold;
+                    margin-bottom: 5px;
+                }
+            }
+
+            .dirField{
+                width: 200px;
+                height: 150px;
+                border: 1px solid black;
+                margin-bottom: 20px;
+
+                p{
+                    width: 100%;
+                    padding-left: 10px;
+
+                    &:hover{
+                        cursor: pointer;
+                        background-color: #0800B0;
+                        color: white;
+                    }
+                }
+
+                .dirWindows{
+
+                    .winTag{
+                        padding-left: 30px;
+                    }
+
+                    p{
+                        padding-left: 50px;
+                    }
+                }
+            }
+
+            select{
+                margin-top: 5px;
+                padding: 5px 2px;
+                width: 200px;
+
+                option:checked{
+                    border: 0;
+                }
+            }
+        }
+
+        .buttons{
+            display: flex;
+            flex-direction: column;
+            margin: 0 0 20px 20px;
+
+            button{
+                width: 100px;
+                height: 30px;
+                margin-bottom: 20px;
+            }
+        }
+    }
+}
+
+.ChangeIcon{
+    width: unset;
+    height: unset;
+
+    .main{
+        display: flex;
+        flex-direction: row;
+        margin: 10px;
+
+        .paragraphs{
+            margin-right: 15px;
+
+            p:nth-last-child(1){
+                margin-top: 10px;
+            }
+        }
+        
+        .inputFields{
+            input{
+                font-size: 15px;
+                width: 200px;
+                border: 1px solid black;
+                padding: 1px;
+                text-transform: uppercase;
+            }
+
+            .chooseIcon{
+                margin-top: 30px;
+                width: 200px;
+                border: 1px solid black;
+                overflow-y: hidden;
+                overflow-x: scroll;
+
+                img{
+                    padding: 2px;
+                    margin-left: 5px;
+                }
+            }
+        }
+
+        .buttons{
+            margin-left: 20px;
+            display: flex;
+            flex-direction: column;
+
+            button{
+                width: 80px;
+                height: 25px;
+                margin-top: 5px;
+
+                &:nth-child(1){
+                    margin-top: 0;
+                }
+            }
+        }
+    }
+}
+
+.Run,.Delete{
+    height: unset;
+    width: unset;
+    .main{
+        width: 270px;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        
+        p{
+            margin: 20px 0 ;
+            font-size: 15px;
+        }
+
+        select{
+            width: 180px;
+            font-size: 15px;
+            margin-bottom: 20px;
+            padding: 2px;
+            text-align-last:center;
+        }
+    }
+}
+
+.Move,.Copy{
+    height: unset;
+    width: unset;
+
+    .moveWrapper{
+        display: flex;
+        flex-direction: row;
+        padding: 20px;
+
+        .moveDataWrapper{
+            display: flex;
+            flex-direction: column;
+
+            select{
+                width: 180px;
+                font-size: 15px;
+                padding: 2px;
+                text-align-last:center;
+            }
+
+
+            .moveMain{
+                display: flex;
+                flex-direction: row;
+                
+
+                .moveFirstColumn{
+                    p{
+                        margin: 0 10px 10px 0;
+                        padding-top: 3px;
+                    }
+                }
+
+                .moveShowInfo{
+                    text-align: center;
+                    p{
+                        margin-top: 10px;
+                        text-transform: capitalize;
+                    }
+                }
+            }
+
+            .moveToGroup{
+                margin-top: 10px;
+                select{
+                    margin-top: 10px;
+                }
+            }
+        }
+
+        .buttons{
+            display: flex;
+            flex-direction: column;
+            margin-left: 20px;
+
+            button{
+                width: 80px;
+                height: 25px;
+                margin-bottom: 10px;
             }
         }
     }

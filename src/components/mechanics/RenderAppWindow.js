@@ -10,6 +10,9 @@ import New from '../program manager/New'
 import ProgramGroupProperties from '../program manager/ProgramGroupProperties'
 import ProgramItemsProperties from '../program manager/ProgramItemsProperties'
 import InvalidPath from '../program manager/InvalidPath'
+import ProgramItemsBrowse from '../program manager/Browse'
+import ChangeIconPM from '../program manager/ChangeIcon'
+import Open from '../program manager/Open'
 
 import '../../styles/RenderAppWindow.scss'
 import '../../styles/PMessentials.scss'
@@ -168,7 +171,7 @@ class RenderAppWindow extends React.Component {
     handleActiveClockType = value => this.setState({ activeClockType: `${value}` })
 
     runProgram = ProgramName => {
-        const { activeProgram: name, icon } = this.props;
+        const { activeProgram: name, icon, addedPrograms } = this.props;
         if (ProgramName === 'Clock') return <Clock
             {...this.props}
             handleNoTitle={() => this.handleNoTitle()}
@@ -210,7 +213,7 @@ class RenderAppWindow extends React.Component {
         />
         else if (ProgramName === 'Microsoft Visual Basic') return <RenderIconsInWindow
             {...this.props}
-            type="mvb"
+            type="microsoft visual basic"
         />
         else if (ProgramName === 'Main') return <RenderIconsInWindow
             {...this.props}
@@ -235,7 +238,45 @@ class RenderAppWindow extends React.Component {
         />
         else if (ProgramName === 'Invalid Path') return <InvalidPath
             {...this.props}
+            type='invalidPath'
         />
+        else if (ProgramName === 'Program Items Browse') return <ProgramItemsBrowse
+            {...this.props}
+        />
+        else if (ProgramName === 'Change Icon') return <ChangeIconPM
+            {...this.props}
+        />
+        else if (ProgramName === 'Run') return <Open
+            {...this.props}
+            type='run'
+        />
+        else if (ProgramName === 'Delete') return <Open
+            {...this.props}
+            type='delete'
+        />
+        else if (ProgramName === 'Move') return <Open
+            {...this.props}
+            type='move'
+            program='move'
+        />
+        else if (ProgramName === 'Copy') return <Open
+            {...this.props}
+            type='move'
+            program='copy'
+        />
+        else if (ProgramName === 'Wrong Program Name') return <InvalidPath
+            {...this.props}
+            type="programName"
+        />
+        else if (ProgramName === 'Wrong Directory Name') return <InvalidPath
+            {...this.props}
+            type="dirName"
+        />
+        else if (addedPrograms.filter(program => program.name === ProgramName)) return <RenderIconsInWindow
+            {...this.props}
+            type={ProgramName}
+        />
+
     }
 
     render() {

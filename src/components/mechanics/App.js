@@ -25,7 +25,35 @@ class App extends React.Component {
     fontFamily: '',
     fontURL: '',
     addedPrograms: [],
-    programItemsPath: ''
+    addedProgramsByUser: [],
+    programItemsPath: '',
+    programItemsData: null,
+    iconData: null,
+    browseParent: 'ProgramItemsProperties'
+  }
+
+  changeProgramProperties = (data, type) => {
+    const newTable = this.state.addedProgramsByUser.filter(program => program.name !== data.name && program.dir !== data.oldDir);
+    const changedProgram = newTable.concat({ name: data.name, dir: data.newDir.toLowerCase(), icon: data.icon });
+    if (type === 'move') this.setState({
+      addedProgramsByUser: changedProgram
+    })
+    else if (type === 'copy') this.setState({
+      addedProgramsByUser: this.state.addedProgramsByUser.concat({ name: data.name, dir: data.newDir.toLowerCase(), icon: data.icon })
+    })
+
+  }
+
+  deleteProgram = name => {
+    const containsProgram = this.state.addedProgramsByUser.filter(program => program.name === name);
+    const containsFolder = this.state.addedPrograms.filter(folder => folder.name === name)
+
+    if (containsProgram) this.setState({
+      addedProgramsByUser: this.state.addedProgramsByUser.filter(program => program.name !== name)
+    })
+    if (containsFolder) this.setState({
+      addedPrograms: this.state.addedPrograms.filter(program => program.name !== name)
+    })
   }
 
   minimalizeApp = (name, icon) => {
@@ -61,7 +89,16 @@ class App extends React.Component {
       addedPrograms: prevState.addedPrograms.concat({ name, icon: pmicons })
     }
   })
-  setProgramItemsPath = programItemsPath => this.setState({ programItemsPath }, console.log(programItemsPath))
+
+  addUserProgram = (dir, name, icon) => this.setState(prevState => {
+    return {
+      addedProgramsByUser: prevState.addedProgramsByUser.concat({ dir, name, icon })
+    }
+  })
+  changeBrowseParent = browseParent => this.setState({ browseParent })
+  changeProgramItemsData = programItemsData => this.setState({ programItemsData })
+  changeIconData = iconData => this.setState({ iconData })
+  setProgramItemsPath = programItemsPath => this.setState({ programItemsPath })
 
   removeRightClick = e => {
     e.preventDefault();
@@ -148,11 +185,19 @@ class App extends React.Component {
               showOptionsWindow={this.showOptionsWindow}
               handleActiveAppOptionWindow={(name, icon) => this.handleActiveAppOptionWindow(name, icon)}
               changeFont={(fontName, fontURL) => this.changeFont(fontName, fontURL)}
-              setProgramItemsPath={path => this.setProgramItemsPath(path)}
               addGroupProgram={name => this.addGroupProgram(name)}
-              path={this.state.programItemsPath}
+              addUserProgram={(dir, name, icon) => this.addUserProgram(dir, name, icon)}
+              changeProgramItemsData={data => this.changeProgramItemsData(data)}
+              changeIconData={data => this.changeIconData(data)}
+              changeBrowseParent={parent => this.changeBrowseParent(parent)}
+              addedProgramsByUser={this.state.addedProgramsByUser}
+              browseParent={this.state.browseParent}
+              programItemsData={this.state.programItemsData}
+              iconData={this.state.iconData}
               actualFont={fontFamily}
               actualURL={fontURL}
+              deleteProgram={name => this.deleteProgram(name)}
+              changeProgramProperties={(data, type) => this.changeProgramProperties(data, type)}
             />}
         </div>
       </section>
