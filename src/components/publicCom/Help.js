@@ -1,5 +1,4 @@
-import React from 'react'
-import '../../styles/Help.scss'
+import React from 'react';
 
 class Help extends React.Component {
 

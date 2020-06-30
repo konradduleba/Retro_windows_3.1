@@ -1,0 +1,915 @@
+@import './variables.scss';
+
+.programWindow{
+    @include NormalAppWindowSize();
+    position: absolute;
+    box-shadow: 0 0 0 3px $appBorderInsideColor, 0 0 0 4px $appBorderOutsideColor;
+    border-radius: 1px;
+    z-index: 6;
+
+    --position: -8px;
+    --spaceFromLeft: 1px;
+    --barWidth: calc(100% - 2*var(--spaceFromLeft));
+
+    .resizingElements{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        list-style: none;
+        
+        .direction{
+            position: absolute;
+            width: 10px;
+            height: 10px;
+        }
+
+        .ne{
+            top: var(--position);
+            right: var(--position);
+            cursor: ne-resize;
+        }
+
+        .se{
+            bottom: var(--position);
+            right: var(--position);
+            cursor: se-resize;
+        }
+
+        .sw{
+            bottom: var(--position);
+            left: var(--position);
+            cursor: sw-resize;
+        }
+
+        .nw{
+            top: var(--position);
+            left: var(--position);
+            cursor: nw-resize;
+        }
+
+        .n{
+            top: var(--position);
+            left: var(--spaceFromLeft);
+            cursor: n-resize;
+            width: var(--barWidth)
+        }
+
+        .s{
+            bottom: var(--position);
+            left: var(--spaceFromLeft);
+            cursor: s-resize;
+            width: var(--barWidth)
+        }
+
+        .e{
+            right: var(--position);
+            top: var(--spaceFromLeft);
+            cursor: e-resize;
+            height: var(--barWidth)
+        }
+
+        .w{
+            left: var(--position);
+            top: var(--spaceFromLeft);
+            cursor: w-resize;
+            height: var(--barWidth)
+        }
+
+
+    }
+
+    .container{
+        width: 100%;
+        height: 100%;
+        background-color: white;
+        @include FlexColumn();
+        border: 1px solid black;
+    }
+}
+
+.withoutBoxShadow{
+    box-shadow: none;
+}
+
+.ProgramManager{
+    .appList{
+        height: 100%;
+        width: 100%;
+        @include FlexRow();
+        display: inline-block;
+        @include ShowScroll();
+        z-index: 40;
+
+        .appIcon{
+            margin: 15px 0;
+        }
+
+        .menu{
+            border-bottom: 1px solid black;
+            display: flex;
+            flex-direction: row;
+            height: 35px;
+        
+            div{
+                display: flex;
+                position: relative;
+        
+                p{
+                    height: 100%;
+                    padding: 0 15px;
+                    @include FlexItemsCenter();
+                    z-index: 40;
+        
+                    &:hover{
+                        @include WindowsHover();
+                    }
+        
+                    &.true{
+                        background-color:$windowsColor ;
+                        color: white;
+                    }
+                }
+            
+                ul{
+                    visibility: hidden;
+                    background-color: white;
+                    position: absolute;
+                    top: 35px;
+                    left: 0;
+                    list-style: none;
+                    border: 1px solid black;
+                    border-top: 0;
+                    z-index: 41;
+        
+                    &.File{
+                        min-width: 150px;
+                        border-left: 0;
+        
+                        li{
+                            &:nth-last-child(1), &:nth-last-child(2){
+                                border-top: 1px solid black;
+                            }
+                        }
+                    }
+        
+                    &.Options{
+                        min-width: 190px;
+                    }
+        
+                    &.Window{
+                        min-width: 210px;
+        
+                        li{
+                            &:nth-child(4){
+                                border-top: 1px solid black;
+                            }
+                        }
+                    }
+        
+                    &.Help{
+                        min-width: 220px;
+        
+                        li{
+                            &:nth-child(3), &:nth-last-child(1){
+                                border-top: 1px solid black;
+                            }
+                        }
+                    }
+        
+                    li{
+                        height: 35px;
+                        padding: 0 15px;
+                        @include FlexItemsCenter();
+        
+                        &:hover{
+                            @include WindowsHover();
+                        }
+                    }
+        
+                    &.true{
+                        visibility: visible;
+                    }
+                    &.false{
+                        visibility: hidden;
+                    }
+                }
+            }
+        }
+    }
+
+    .hideMenu{
+        position: absolute;
+        top: 31px;
+        left: 0;
+        width: 100%;
+        height: calc(100% - 31px);
+    }
+}
+
+.NewProgramObject{
+    @include SmallAppWindowSize(); 
+    .newContent{
+        @include FlexRow();
+        padding: 20px;
+
+        .main{
+            position: relative;
+            padding: 15px;
+            border: 1px solid black;
+            @include FlexColumn();
+
+            .new{
+                position: absolute;
+                top: -5px;
+                left: 10px;
+                padding: 0 5px;
+                background-color: white;
+            }
+
+            div{
+                margin: 5px 0 10px;
+                @include FlexItemsCenter();
+
+                &:nth-last-child(1){
+                    margin-bottom: 0;
+                }
+
+                .checkbox-round {
+                    margin-right: 5px;
+                    width: 1em;
+                    height: 1em;
+                    background-color: white;
+                    border-radius: 50%;
+                    border: 1px solid black;
+                    appearance: none;
+                    outline: none;
+                }
+                
+                .checkbox-round:checked {
+                    background-color: black;
+                }
+            }
+
+        }
+
+        @include Buttons();
+    }
+}
+
+.ProgramGroupProperties,.ProgramItemsProperties{
+    @include SmallAppWindowSize(); 
+    .PGPcontent{
+        margin: 20px;
+        @include FlexRow();
+
+        .main, .buttons{
+            @include FlexRow();
+
+            div{
+                @include FlexColumn();
+            }
+        }
+
+        .main{
+            p{
+                margin: 3px 5px 0 0;
+
+                &:nth-last-child(1){
+                    margin-top: 13px;
+                }
+            }
+
+            input{
+                padding: 2px;
+                font-size: 15px;
+                margin-bottom: 5px;
+                
+                input:nth-last-child(1){
+                    margin-bottom: unset;
+                }
+            }
+
+            .minimized{
+                @include FlexRow();
+                margin-top: 10px;
+                margin-bottom: 25px;
+                
+                label{
+                    margin-left: 10px;
+                    margin-top: 3px;
+                }
+            }
+
+        }
+
+        @include Buttons();
+    }
+}
+
+.ProgramItemsProperties{
+    @include SmallAppWindowSize(); 
+    .PGPcontent{
+        margin-bottom: unset;
+        @include FlexColumn();
+
+        .firstline{
+            @include FlexRow();
+        }
+
+        .secondline{
+            position: absolute;
+            top: 80%;
+            left: 10%;
+        }
+        .main{
+            input{
+
+                &:nth-last-child(1){
+                    margin-top: 5px;
+                }
+
+                &:nth-child(2){
+                    text-transform: uppercase;
+                }
+            }
+
+            
+            @include SelectField();
+            
+            select{
+                width: unset;
+                margin-bottom: 5px;
+            }
+            
+            p{
+                margin-right: 5px;
+
+                &:nth-child(2){
+                    margin: 12px 5px 10px 0;
+                }
+            }
+        }
+
+        @include Buttons();
+
+        .buttons{
+            button{
+                width: 120px;
+            }
+        }
+    }
+}
+
+.ProgramItemsBrowse{
+    @include SmallAppWindowSize(); 
+    .main{
+        margin: 20px;
+        @include FlexRow();
+
+        .file__name{
+            width: 210px;
+
+            input{
+                padding: 2px;
+                font-size: 15px;
+            }
+
+            ul{
+                margin: 10px 0 20px;
+                list-style: none;
+                width: 200px;
+                height: 150px;
+                border: 1px solid black;
+                overflow: hidden;
+                overflow-y: auto;
+
+                li{
+                    padding: 2px;
+
+                    &:hover{
+                        @include WindowsHover();
+                    }
+                }
+            }
+
+            select{
+                margin-top: 5px;
+                padding: 5px 2px;
+                width: 200px;
+
+                option:checked{
+                    border: 0;
+                }
+            }
+        }
+
+        .directories{
+            @include FlexColumn();
+            margin-left: 10px;
+
+            p{
+                padding: 3px 0;
+
+                &.dirPlace{
+                    font-weight: bold;
+                    margin-bottom: 5px;
+                }
+            }
+
+            .dirField{
+                width: 200px;
+                height: 150px;
+                border: 1px solid black;
+                margin-bottom: 20px;
+
+                p{
+                    width: 100%;
+                    padding-left: 10px;
+
+                    &:hover{
+                        @include WindowsHover();
+                    }
+                }
+
+                .dirWindows{
+                    .winTag{
+                        padding-left: 30px;
+                    }
+
+                    p{
+                        padding-left: 50px;
+                    }
+                }
+            }
+
+            select{
+                margin-top: 5px;
+                padding: 5px 2px;
+                width: 200px;
+
+                option:checked{
+                    border: 0;
+                }
+            }
+        }
+
+        @include Buttons();
+
+        .buttons{
+            button{
+                margin-top: 20px;
+                height: 30px;
+                width: 100px;
+            }
+        }
+    }
+}
+
+.ChangeIcon{
+    @include SmallAppWindowSize(); 
+    .main{
+        @include FlexRow();
+        margin: 10px;
+
+        .paragraphs{
+            margin-right: 15px;
+
+            p:nth-last-child(1){
+                margin-top: 10px;
+            }
+        }
+        
+        .inputFields{
+            input{
+                font-size: 15px;
+                width: 200px;
+                border: 1px solid black;
+                padding: 1px;
+                text-transform: uppercase;
+            }
+
+            .chooseIcon{
+                margin-top: 30px;
+                width: 200px;
+                border: 1px solid black;
+                @include ShowScroll();
+
+                img{
+                    padding: 2px;
+                    margin-left: 5px;
+                }
+            }
+        }
+
+        @include Buttons();
+    }
+}
+
+.Run,.Delete{
+    @include SmallAppWindowSize(); 
+    .main{
+        @include FlexItemsCenter();
+        @include FlexColumn();
+        margin: 20px;
+        
+        p{
+            font-size: 15px;
+            margin-bottom: 20px;
+        }
+
+        @include SelectField();
+    }
+}
+
+.Move,.Copy{
+    @include SmallAppWindowSize(); 
+    .moveWrapper{
+        @include FlexRow();
+        padding: 20px;
+
+        .moveDataWrapper{
+            @include FlexColumn();
+            @include SelectField();
+
+            .moveMain{
+                @include FlexRow();
+                
+                .moveFirstColumn{
+                    p{
+                        margin: 0 10px 10px 0;
+                        padding-top: 3px;
+                    }
+                }
+
+                .moveShowInfo{
+                    text-align: center;
+                    p{
+                        margin-top: 10px;
+                        text-transform: capitalize;
+                    }
+                }
+            }
+        }
+
+        @include Buttons();
+    }
+}
+
+.InvalidPath,.WrongProgramName,.WrongDirectoryName{
+    @include SmallAppWindowSize(); 
+    .main{    
+        margin: 20px;
+        height: 100%;
+        @include FlexColumn();
+        @include FlexItemsCenter();
+
+        div{
+            @include FlexRow();
+
+            img{
+                height: 40px;
+                width: 40px;
+            }
+
+            p{
+                line-height: 40px;
+                margin-left: 20px;
+            }
+
+            button{
+                margin-top: 20px;
+                width: 80px;
+                height: 30px;
+
+                &:nth-last-child(1){
+                    margin-left: 15px;
+                }
+            }
+        }
+    }
+}
+
+.aboutContainer{
+    @include SmallAppWindowSize(); 
+    @include FlexRow();
+    position: relative;
+
+    img{
+        margin: 20px;
+        height: 36px;
+    }
+
+    .info{
+        @include FlexColumn();
+        flex-grow: 1;
+        padding: 20px;
+        padding-left: 0;
+
+        .mainInfo{
+            margin-bottom: 40px;
+        }
+
+        .licence{
+            padding-bottom: 20px;
+            border-bottom: 2px solid black;
+        }
+
+        .serialNumber{
+            margin-top: 20px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid black;
+        }
+
+        .sysInfo{
+            margin-top: 20px;
+            
+            p{
+                text-transform: capitalize;
+            }
+        }
+    }
+
+    button{
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 20px 20px 0 0;
+        text-align: center;
+        padding: 5px 30px;
+    }
+}
+
+.CalculatorHelp{
+    .helpContainer{
+        position: absolute;
+        top: 31px;
+        left: 1px;
+        z-index: 11;
+        height: calc(100% - 30px);
+        width: calc(100% - 2px);
+    
+        .helpNavigation{
+            width: 100%;
+            border-bottom: 1px solid black;
+        
+            ul{
+                list-style: none;
+                display: flex;
+                flex-direction: row;
+        
+                li{
+                    height: 30px;
+                    line-height: 30px;
+                    padding: 0 10px;
+        
+                    &:hover{
+                        @include WindowsHover();
+                    }
+                }
+            }
+        }
+        .functionButtons{
+            width: 100%;
+            background-color: darkgrey;
+            border-bottom: 1px solid black;
+    
+            button{
+                height: 30px;
+                padding: 0 5px;
+                font-size: 15px;
+            }
+        }
+    
+        .mainContent{
+            overflow: auto;
+            width: 100%;
+            height: calc(100% - 62px);
+            padding: 25px 15px;
+
+            p{
+                padding: 5px 0;
+            }
+
+            .HowTo,.Commands{
+
+                h2{
+                    margin: 20px 0 0;
+                }
+                p{
+                    padding: 3px 0;
+                    color: #00A854;
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}
+
+.navBar{
+    width: 100%;
+    height: 30px;
+    background-color: $windowsColor;
+    @include FlexRow();
+    border-bottom: 1px solid black;
+    @include FlexItemsCenter();
+    margin: 0;
+    position: relative;
+
+    &:hover{
+        cursor: default;
+    }
+
+    button{
+        position: absolute;
+        top: 0;
+        height: 100%;
+        border: 0;
+        border-right: 1px solid black;
+        outline: none;
+
+        &:hover{
+            cursor: pointer;
+            background-color: darkgrey;
+        }
+        svg{
+            display: block;
+            width: 35px;
+            font-size: 18px;
+        }
+
+        &:last-child{
+            border: 0;
+            right: 0;
+            border-left: 1px solid black;
+        }
+    }
+
+    p{
+        margin: 0 auto;
+        color: white;
+        height: 100%;
+        width: calc( 100% - 70px);
+        @include FlexItemsCenter();
+        justify-content: center;
+        position: relative;
+    }
+}
+
+.optionsWindow{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: white;
+    z-index: 999;
+    border: 1px solid black;
+
+    ul{
+        list-style: none;
+
+        li{
+            @include FlexRow();
+            @include FlexItemsCenter();
+
+            width: 100%;
+            height: 35px;
+            justify-content: center;
+            font-size: 15px;
+
+            &:nth-last-child(1){
+                border-top: 1px solid black;
+            }
+
+            &:hover{
+                @include WindowsHover();
+            }
+
+            &:hover>p{
+                color: white;
+            }
+
+            span{
+                width: 40px;
+                height: 100%;
+                font-size: 15px;
+                @include FlexItemsCenter();
+                justify-content: center;
+            }
+
+            p{
+                display: flex;
+                justify-content: left;
+                width: 100px;
+                color: black;
+
+            }
+        }
+    }
+}
+
+.optionCloseWindow{
+    position: absolute;
+    top: -200vh;
+    left: -200vw;
+    width: 400vw;
+    height: 400vh;
+    z-index: 998;
+}
+
+.settingsWindow{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: white;
+    width: 200px;
+    border: 1px solid lightgray;
+    z-index: 999;
+    @include FlexColumn();
+
+    .navigation{
+        @include FlexRow();
+        @include FlexItemsCenter();
+
+        width: 100%;
+        height: 35px;
+        position: relative;
+
+        span{
+            position: absolute;
+            top: 50%;
+            right: 17px;
+            font-size: 18px;
+            transform: translate(50%,-50%);
+            color: #666;
+            cursor: pointer;
+
+            &:hover{
+                color: black;
+            }
+        }
+
+        p{
+            margin-left: 10px;
+            cursor: default;
+        }
+
+    }
+
+    .container{
+        @include FlexColumn();
+        flex-grow: 1;
+
+        .icon_name{
+            @include FlexRow();
+            @include FlexItemsCenter();
+
+            height: 60px;
+            width: 100%;
+            background-color: lightgrey;
+
+            img{
+                height: 36px;
+                width: 36px;
+                margin-left: 10px;
+            }
+
+            input{
+                height: 36px;
+                width: 130px;
+                margin-left: 10px;
+                padding: 0 5px;
+                
+                &::placeholder{
+                    color: black;
+                }
+            }
+        }
+
+        .data{
+            @include FlexRow();
+            background-color: lightgrey;
+
+            p{
+                padding: 15px 0 15px 10px;
+                font-size: 15px;
+
+                &:nth-last-child(1){
+                    padding-right: 10px;
+                    text-align: left;
+                }
+            }
+        }
+
+        .endButtons{
+            @include FlexRow();
+            @include FlexItemsCenter();
+
+            justify-content: space-around;
+            padding: 10px 0;
+
+            button{
+                height: 30px;
+                padding: 0 10px;
+            }
+        }
+    }
+}

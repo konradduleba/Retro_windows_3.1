@@ -1,8 +1,7 @@
-.programWindow.Clock{
-    width: 350px;
-    height: 350px;
-    min-height: 350px;
-    min-width: 350px;
+@import './variables.scss';
+
+.Clock{
+    @include NormalAppWindowSize();
     --navBarHeight: 32px;
 
     .clockContainer{
@@ -26,9 +25,7 @@
                 text-align: center;
 
                 &:hover{
-                    color: white;
-                    background-color: #0800b0;
-                    cursor: pointer;
+                    @include WindowsHover();
                 }
             }
         }
@@ -37,8 +34,7 @@
             height: calc(100% - 30px);
             width: 100%;
             background-color: lightgray;
-            display: flex;
-            flex-direction: column;
+            @include FlexColumn();
             align-items: center;
             justify-content: center;
             position: relative;
@@ -134,9 +130,7 @@
                     }
 
                     &:hover{
-                        color: white;
-                        background-color: #0800b0;
-                        cursor: pointer;
+                        @include WindowsHover();
                     }
 
                     &.line{

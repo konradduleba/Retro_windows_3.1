@@ -1,6 +1,4 @@
 import React from 'react';
-import '../../styles/AboutProgram.scss';
-// import AboutProgramIcon from '../../img/help.png';
 
 export default function AboutProgram({ properties, type, closeActiveProgram, closeDesktopProgram }) {
     const { name, icon } = properties;

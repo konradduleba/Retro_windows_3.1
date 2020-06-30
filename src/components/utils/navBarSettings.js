@@ -15,5 +15,5 @@ export const ProgramsWithoutExit = [
     'Move',
     'Copy',
     'Wrong Program Name',
-    'Wrong Directory Name'
+    'Wrong Directory Name',
 ]

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import WindowsIcon from '../../img/windows.png'
-import '../../styles/ProgramManagerMenu.scss'
+import WindowsIcon from '../../img/windows.png';
 
 export default function Menu({ menuList, addToActiveProgram }) {
     const [visibleFile, setFileVisible] = useState(false);
@@ -88,7 +87,9 @@ export default function Menu({ menuList, addToActiveProgram }) {
                     </div>
                 ))}
             </div >
-            <div className="hideMenu" onClick={() => showActiveMenu()}></div>
+            {(visibleFile || visibleHelp || visibleOption || visibleWindow) &&
+                <div className="hideMenu" onClick={() => showActiveMenu()}></div>
+            }
         </>
     )
 }

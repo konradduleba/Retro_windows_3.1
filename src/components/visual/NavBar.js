@@ -1,5 +1,4 @@
 import React from 'react';
-import '../../styles/NavBar.scss';
 import { CloseOutlined, MinusOutlined } from '@ant-design/icons';
 import ShowOptionsWindow from '../rightClick/ShowOptionsWindow';
 import { ProgramsWithoutExit } from '../utils/navBarSettings'

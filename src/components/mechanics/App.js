@@ -7,6 +7,7 @@ import { AppIcons } from '../utils/images'
 import pmicons from '../../img/pmicons.png';
 
 import '../../styles/App.scss';
+import '../../styles/SystemAppsSettings.scss';
 
 class App extends React.Component {
 

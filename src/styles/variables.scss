@@ -1,0 +1,72 @@
+$windowsColor: #0800B0;
+$appBorderInsideColor: #ccc;
+$appBorderOutsideColor: #000;
+$pageBgColor: #333;
+$crtBgColor: gray;
+
+
+@mixin NormalAppWindowSize {
+    min-width: 450px;
+    min-height: 350px;
+    height: 350px;
+    width: 500px;
+}
+
+@mixin SmallAppWindowSize {
+    min-width: unset;
+    min-height: unset;
+    height: unset;
+    width: unset;
+}
+
+@mixin FlexRow {
+    display: flex;
+    flex-direction: row;
+}
+
+@mixin FlexColumn {
+    display: flex;
+    flex-direction: column;
+}
+
+@mixin FlexItemsCenter {
+    display: flex;
+    align-items: center;
+}
+
+@mixin Buttons{
+    .buttons{
+        @include FlexColumn();
+        margin-left: 20px;
+
+        button{
+            width: 80px;
+            height: 25px;
+            margin-bottom: 5px;
+
+            &:nth-last-child(1){
+                margin-bottom: unset;
+            }
+        }
+    }
+}
+
+@mixin WindowsHover{
+    color: white;
+    background-color: $windowsColor;
+    cursor: pointer;
+}
+
+@mixin SelectField{
+    select{
+        width: 180px;
+        font-size: 15px;
+        padding: 2px;
+        text-align-last:center;
+    }
+}
+
+@mixin ShowScroll {
+    overflow: hidden;
+    overflow-y: auto;
+}

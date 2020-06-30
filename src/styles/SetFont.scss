@@ -1,34 +1,14 @@
-.programWindow.SetFont{
-    width: 400px;
-    height: 370px;
-    // max-width: 350px;
-    // max-height: 350px;
-    box-shadow: none;
-    --navBarHeight: 32px;
+@import './variables.scss';
 
-    .resizingElements{
-        visibility: hidden;
-    }
-
-    .container{
-        .navBar{
-            button{
-    
-                &:nth-child(3){
-                    display: none;
-                }
-            }
-        }
-    }
-    
-    .fontContainer{
+.fontContainer{
+        @include SmallAppWindowSize();
+        @include FlexColumn();
         position: relative;
-        flex-direction: column;
+        margin: 20px;
 
         .chooseFont{
-            margin: 20px;
-            display: flex;
-            flex-direction: column;
+            margin-left: 20px;
+            @include FlexColumn();
     
             input{
                 padding: 3px 5px;
@@ -52,9 +32,7 @@
                     padding: 2px 5px;
     
                     &:hover{
-                        color: white;
-                        background-color: #0800b0;
-                        cursor: pointer;
+                        @include WindowsHover();
                     }
                 }
             }
@@ -64,9 +42,8 @@
             position: absolute;
             top: 0;
             right: 0;
-            margin: 38px 20px;
-            display: flex;
-            flex-direction: column;
+            margin: 18px 20px;
+            @include FlexColumn();
 
             button{
                 text-align: center;
@@ -74,7 +51,6 @@
             }
 
             button:last-child{
-                
                 margin-top: 20px;
             }
         }
@@ -84,9 +60,8 @@
         box-sizing: border-box;
         width: 100%;
         height: 150px;
-        display: flex;
+        @include FlexItemsCenter();
         justify-content: center;
-        align-items: center;
 
         .samplePlace {
             width: 90%;
@@ -94,9 +69,8 @@
             box-sizing: border-box;
             border: 1px solid black;
             position: relative;
-            display: flex;
+            @include FlexItemsCenter();
             justify-content: center;
-            align-items: center;
 
             .sampleTitle {
                 position: absolute;
@@ -111,4 +85,3 @@
             }
         }
     }
-}

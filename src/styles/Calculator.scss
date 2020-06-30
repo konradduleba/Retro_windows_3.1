@@ -1,10 +1,13 @@
+@import './variables.scss';
+
 .programWindow.Calculator{
+    @include SmallAppWindowSize();
     width: 350px;
     height: 350px;
     max-width: 350px;
     max-height: 350px;
-    box-shadow: none;
     --navBarHeight: 32px;
+    box-shadow: unset;
 
     .resizingElements{
         visibility: hidden;
@@ -19,8 +22,7 @@
         width: calc(100% - 2px);
 
         .calculatorNavigation{
-            display: flex;
-            flex-direction: row;
+            @include FlexRow();
             width: 100%;
             height: 30px;
             background-color: white;
@@ -32,13 +34,11 @@
                 padding: 0 10px;
 
                 &:Hover{
-                    color: white;
-                    background-color: #0800b0;
-                    cursor: pointer;
+                    @include WindowsHover();
                 }
 
                 &.true{
-                    background-color: #0800b0;
+                    background-color: $windowsColor;
                     color: white;
                 }
             }
@@ -79,9 +79,7 @@
                     position: relative;
 
                     &:hover{
-                        cursor: pointer;
-                        color: white;
-                        background-color: #0800b0;
+                        @include WindowsHover();
                     }
 
                     &.viewType{
@@ -129,8 +127,7 @@
 
             ul{
                 list-style: none;
-                display: flex;
-                flex-direction: row;
+                @include FlexRow();
                 flex-wrap: wrap;
 
                 .key{
@@ -138,8 +135,7 @@
                     height: 40px;
                     margin: 3px;
                     border-radius: 10px;
-                    display: flex;
-                    align-items: center;
+                    @include FlexItemsCenter();
                     justify-content: center;
                     box-sizing: border-box;
                     font-weight: 600;

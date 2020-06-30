@@ -9,8 +9,8 @@ import { ControlPanelIcons, GamesIcons, StartUpIcons, MVBIcons, MainIcons, Acces
 export default function RenderIconsInWindow(props) {
     const { type, addedPrograms, addedProgramsByUser } = props;
     return (
-        <div className="appList" style={{ zIndex: "40" }}>
-            {type === 'programManager' &&
+        <div className="appList">
+            {type === 'program manager' &&
                 <>
                     <RenderMenu
                         menuList={data}
@@ -57,7 +57,7 @@ export default function RenderIconsInWindow(props) {
                     programList={MainIcons}
                 />
             }
-            {type === 'controlPanel' &&
+            {type === 'control panel' &&
                 <RenderAppIcon
                     {...props}
                     programList={ControlPanelIcons}
