@@ -2,7 +2,7 @@
 
 This project is based on quite popular Windows 3.1.
 
-Technologies which I've been using in retro_windows_3.1:
+Technologies which I've been using in this retro_windows_3.1:
 - React,
 - SCSS,
 - Javascript
